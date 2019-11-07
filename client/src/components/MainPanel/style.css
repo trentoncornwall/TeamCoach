@@ -1,0 +1,17 @@
+.MainPanelBackground {
+	background: white;
+	height: 80%;
+	width: 85%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	opacity: 0.85;
+	border-radius: 30px;
+}
+
+.MainPanelInfo {
+	opacity: 1;
+	color: grey;
+	padding: 20px;
+}

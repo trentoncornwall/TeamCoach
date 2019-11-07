@@ -1,0 +1,17 @@
+.MainNav {
+	width: 500px;
+}
+
+.MainNav li {
+	padding-right: 30px;
+	font-size: 25px;
+	display: inline;
+	list-style-type: none;
+}
+
+.MainNav hr {
+	width: 100%;
+	position: absolute;
+	left: 50px;
+	width: 50%;
+}
