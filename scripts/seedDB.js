@@ -9,6 +9,7 @@ const userSeed = [
   {
     fName: "Root",
     lName: "User",
+    username: "ROOT",
     password: "test",
     userType: 3,
     teamID: "ALL",
@@ -17,6 +18,7 @@ const userSeed = [
   {
     fName: "Super",
     lName: "Virsor",
+    username: "SuperVIRsor",
     password: "test",
     userType: 2,
     teamID: "ALL",
@@ -25,6 +27,7 @@ const userSeed = [
   {
     fName: "Manager",
     lName: "Person",
+    username: "MANAGER",
     password: "test",
     userType: 1,
     teamID: "ALL",
@@ -33,6 +36,7 @@ const userSeed = [
   {
     fName: "Base",
     lName: "User",
+    username: "BASE",
     password: "test",
     userType: 0,
     teamID: "ALL",
@@ -41,6 +45,7 @@ const userSeed = [
   {
     fName: "Base2",
     lName: "User2",
+    username: "BASE2",
     password: "test",
     userType: 0,
     teamID: "ALL",

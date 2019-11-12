@@ -5,6 +5,6 @@ export default {
     return axios.get("/api/users");
   },
   postUser: function(user) {
-    return axios.post("/api/users");
+    return axios.post("/api/users", user);
   }
 };

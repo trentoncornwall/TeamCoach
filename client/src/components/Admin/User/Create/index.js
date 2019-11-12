@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Axios from "axios";
+// import Axios from "axios";
 import API from "../../../../utils/API";
 
 class UserCreate extends Component {
@@ -7,7 +7,7 @@ class UserCreate extends Component {
     firstName: "",
     lastName: "",
     userType: 0,
-    userEmail: "",
+    username: "",
     userPassword: ""
   };
 
@@ -22,18 +22,26 @@ class UserCreate extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state);
+    // console.log(this.state);
     if (
       this.state.firstName &&
       this.state.lastName &&
-      //   this.state.userEmail &&
+      this.state.username &&
       this.state.userPassword &&
       this.state.userType
     ) {
       API.postUser({
-        fName: this.state.firstname,
+        fName: this.state.firstName,
         lName: this.state.lastName,
-        password: this.state.password,
+        username: this.state.username,
+        password: this.state.userPassword,
+        userType: this.state.userType
+      });
+      console.log({
+        fName: this.state.firstName,
+        lName: this.state.lastName,
+        username: this.state.username,
+        password: this.state.userPassword,
         userType: this.state.userType
       });
     }
@@ -64,10 +72,10 @@ class UserCreate extends Component {
             <option value="3">Admin (3)</option>
           </select>{" "}
           <br />
-          Email: <br />
+          Username: <br />
           <input
             type="text"
-            name="userEmail"
+            name="username"
             onChange={this.handleInputChange}
           />{" "}
           <br />

@@ -12,13 +12,14 @@ module.exports = {
     db.User.create({
       fName: req.body.fName,
       lName: req.body.lName,
+      username: req.body.username,
       password: req.body.password,
       userType: parseInt(req.body.userType),
       teamID: req.body.teamID,
       plans: []
     })
-      .then(res => console.log("OKAY!"))
-      .catch(err => console.log(err));
+      .then(res => res.send("OKAY!"))
+      .catch(err => res.send(err));
 
     //TEST WORKS ______\/____
     // db.User.create({

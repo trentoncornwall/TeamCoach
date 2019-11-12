@@ -29,6 +29,12 @@ class Admin extends Component {
     return (
       <MainPanel>
         <h1>Admin</h1>
+        {/* 
+          "Expected to return a value in arrow function for function below, we can either
+          1. keep this and add a filter to ignore compile warnings,
+          2. change to a forEach function,
+          3. Ignore The warning"
+        */}
         {this.state.userData.map(user => (
           <UserComp
             id={user._id}
@@ -36,6 +42,7 @@ class Admin extends Component {
             type={user.userType}
             fullName={user.fName + " " + user.lName}
             team={user.teamID}
+            username={user.username}
           />
         ))}
         <UserCreate />
