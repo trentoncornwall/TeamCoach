@@ -20,8 +20,9 @@ module.exports = {
 
   deleteUser: (req, res) => {
     //! delete by user ID
-    console.log(req.body);
-    db.User.deleteOne(req.body.data)
+    const query = req.body;
+    console.log("query", query);
+    db.User.deleteOne(query)
       .then(success => {
         res.sendStatus(200);
       })

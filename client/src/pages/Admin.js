@@ -13,6 +13,7 @@ class Admin extends Component {
     let data = {
       _id: id
     };
+    console.log(data);
     API.deleteUser(data).then(this.loadUsers());
   };
 

@@ -1,6 +1,7 @@
 import React from "react";
 import Popup from "reactjs-popup";
 import "./style.css";
+import { userInfo } from "os";
 
 function User(props) {
   return (
@@ -8,7 +9,11 @@ function User(props) {
       <p id={props.id} type={props.type} key={props.id} team={props.team}>
         {props.fullName}
       </p>
-      <button className="userButton delete" onClick={props.delete}>
+      <button
+        className="userButton delete"
+        id={props.id}
+        onClick={props.delete}
+      >
         Delete
       </button>
       <Popup
@@ -20,7 +25,8 @@ function User(props) {
         <hr />
         <br />
         <p> ID : {props.id} </p>
-        <p> Email: {props.email} </p>
+        <p> Email:</p>
+        <input value={props.email} placeholder={props.email}></input>
         <p> Team: {props.teamID} </p>
         <button>Save </button>
       </Popup>
