@@ -16,3 +16,11 @@
 .update {
   color: rgb(225, 120, 82);
 }
+
+.popup-content {
+  font-size: 19px;
+}
+
+.popup-content h1 {
+  color: black;
+}

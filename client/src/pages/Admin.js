@@ -44,6 +44,7 @@ class Admin extends Component {
             id={user._id}
             key={user._id}
             type={user.userType}
+            email={user.email}
             fullName={user.fName + " " + user.lName}
             team={user.teamID}
             delete={() => this.deleteButtonClick(user._id)}
