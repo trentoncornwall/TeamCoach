@@ -9,6 +9,16 @@ class Admin extends Component {
     userData: []
   };
 
+  deleteButtonClick = id => {
+    let data = {
+      _id: id
+    };
+    API.deleteUser(data).then(this.loadUsers());
+  };
+
+  updateButtonClick = id => {
+    console.log(id);
+  };
   loadUsers = () => {
     API.getUsers()
       .then(data => {
@@ -36,6 +46,8 @@ class Admin extends Component {
             type={user.userType}
             fullName={user.fName + " " + user.lName}
             team={user.teamID}
+            delete={() => this.deleteButtonClick(user._id)}
+            update={() => this.updateButtonClick(user._id)}
           />
         ))}
         <UserCreate />

@@ -1,0 +1,18 @@
+.userRow {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: left;
+  align-content: flex-start;
+}
+
+.userButton {
+  height: 19px;
+}
+
+.delete {
+  color: red;
+}
+
+.update {
+  color: rgb(225, 120, 82);
+}

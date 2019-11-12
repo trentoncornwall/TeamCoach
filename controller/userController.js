@@ -6,30 +6,28 @@ module.exports = {
       .then(userData => res.json(userData))
       .catch(err => res.status(422).json(err));
   },
-  CreateUser: (req, res) => {
+  createUser: (req, res) => {
+    db.User.create(req.body.data)
+      //* Need to add a .then to push user to teams, and plans to user
+      .then(dbUser => {
+        res.json(dbUser);
+      })
+      .catch(err => {
+        console.log(err);
+        res.json(err);
+      });
+  },
+
+  deleteUser: (req, res) => {
+    //! delete by user ID
     console.log(req.body);
-
-    db.User.create({
-      fName: req.body.fName,
-      lName: req.body.lName,
-      password: req.body.password,
-      userType: parseInt(req.body.userType),
-      teamID: req.body.teamID,
-      plans: []
-    })
-      .then(res => console.log("OKAY!"))
-      .catch(err => console.log(err));
-
-    //TEST WORKS ______\/____
-    // db.User.create({
-    //   fName: "testFirstName",
-    //   lName: "testLastName",
-    //   password: "testPassword",
-    //   userType: 0,
-    //   teamID: "testTeamID",
-    //   plans: []
-    // })
-    //   .then(res => console.log("OKAY!"))
-    //   .catch(err => console.log(err));
+    db.User.deleteOne(req.body.data)
+      .then(success => {
+        res.sendStatus(200);
+      })
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+      });
   }
 };

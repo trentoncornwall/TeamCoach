@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import Axios from "axios";
 import API from "../../../../utils/API";
 
 class UserCreate extends Component {
   state = {
     firstName: "",
     lastName: "",
+    email: "",
     userType: 0,
-    userEmail: "",
     userPassword: ""
   };
 
@@ -20,23 +19,30 @@ class UserCreate extends Component {
     });
   };
 
+  loadUsers = () => {
+    API.getUsers()
+      .then(data => {
+        var dataArr = [];
+        data.data.map(user => {
+          dataArr.push(user);
+        });
+        this.setState({ userData: dataArr });
+      })
+      .catch(err => console.log(err));
+  };
+
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state);
-    if (
-      this.state.firstName &&
-      this.state.lastName &&
-      //   this.state.userEmail &&
-      this.state.userPassword &&
-      this.state.userType
-    ) {
-      API.postUser({
-        fName: this.state.firstname,
-        lName: this.state.lastName,
-        password: this.state.password,
-        userType: this.state.userType
-      });
-    }
+
+    API.postUser({
+      fName: this.state.firstName,
+      lName: this.state.lastName,
+      email: this.state.email,
+      userType: this.state.userType,
+      password: this.state.userPassword
+    }).then(success => {
+      this.loadUsers();
+    });
   };
 
   render() {
@@ -57,6 +63,14 @@ class UserCreate extends Component {
             onChange={this.handleInputChange}
           />
           <br />
+          Email: <br />
+          <input
+            type="text"
+            name="email"
+            onChange={this.handleInputChange}
+          />{" "}
+          <br />
+          User Type: <br />
           <select name="userType" onChange={this.handleInputChange}>
             <option value="0">Base (0)</option>
             <option value="1">Supervisor (1)</option>
@@ -64,19 +78,13 @@ class UserCreate extends Component {
             <option value="3">Admin (3)</option>
           </select>{" "}
           <br />
-          Email: <br />
-          <input
-            type="text"
-            name="userEmail"
-            onChange={this.handleInputChange}
-          />{" "}
-          <br />
           Password: <br />
           <input
             type="password"
             name="userPassword"
             onChange={this.handleInputChange}
           />
+          <br />
           <input type="submit" value="Submit" onClick={this.handleSubmit} />
         </form>
       </div>
