@@ -9,5 +9,8 @@ export default {
 	},
 	deleteUser: function(data) {
 		return axios.delete("/api/users", { data });
+	},
+	getTeams: function(data) {
+		return axios.get("api/teams");
 	}
 };

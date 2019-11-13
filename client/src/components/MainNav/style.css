@@ -16,3 +16,6 @@
 .nav-link :visited {
 	color: rgb(45, 45, 45);
 }
+hr {
+	width: 100%;
+}
