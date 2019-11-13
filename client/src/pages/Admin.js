@@ -6,10 +6,16 @@ import UserCreate from "../components/Admin/User/Create";
 
 class Admin extends Component {
   state = {
+    firstName: "",
+    lastName: "",
+    userType: 0,
+    email: "",
+    userPassword: "",
     userData: []
   };
 
-  deleteButtonClick = id => {
+  deleteButtonClick = event => {
+    const id = event.target.id;
     let data = {
       _id: id
     };
@@ -17,14 +23,47 @@ class Admin extends Component {
     API.deleteUser(data).then(this.loadUsers());
   };
 
-  updateButtonClick = id => {
-    console.log(id);
+  handleInputChange = event => {
+    const value = event.target.value;
+    const name = event.target.name;
+
+    this.setState({
+      [name]: value
+    });
   };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    // console.log(this.state);
+    if (
+      this.state.firstName &&
+      this.state.lastName &&
+      this.state.email &&
+      this.state.userPassword &&
+      this.state.userType
+    ) {
+      API.postUser({
+        fName: this.state.firstName,
+        lName: this.state.lastName,
+        email: this.state.email,
+        password: this.state.userPassword,
+        userType: this.state.userType
+      });
+      console.log({
+        fName: this.state.firstName,
+        lName: this.state.lastName,
+        email: this.state.email,
+        password: this.state.userPassword,
+        userType: this.state.userType
+      });
+    }
+  };
+
   loadUsers = () => {
     API.getUsers()
       .then(data => {
         var dataArr = [];
-        data.data.map(user => {
+        data.data.forEach(user => {
           dataArr.push(user);
         });
         this.setState({ userData: dataArr });
@@ -48,11 +87,16 @@ class Admin extends Component {
             email={user.email}
             fullName={user.fName + " " + user.lName}
             team={user.teamID}
-            delete={() => this.deleteButtonClick(user._id)}
-            update={() => this.updateButtonClick(user._id)}
+            handleInputChange={this.handleInputChange}
+            delete={this.deleteButtonClick}
           />
         ))}
-        <UserCreate />
+
+        <UserCreate
+          HIC={this.handleInputChange}
+          HS={this.handleSubmit}
+          state={this.state}
+        />
       </MainPanel>
     );
   }
