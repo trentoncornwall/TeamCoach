@@ -7,11 +7,14 @@ state = {
 	data: []
 }
 getAllTeams() {
-	API.getTeams().then( (result) => {
-		this.setState({
-			data: result
-		})
-	}).then(console.log(this.state.data))
+	API.allTeams().then((result) => {
+		var dataArr = [];
+        result.data.forEach(team => {
+          dataArr.push(team);
+        });
+		this.setState({ data: dataArr });
+		console.log(this.state)
+	})
 }
 componentDidMount(){
 	this.getAllTeams();
@@ -20,6 +23,7 @@ componentDidMount(){
 		return (
 			<MainPanel>
 			<MainNav />
+			
 			<p> TEAMSLKSJ DFLKJS D</p>
 		</MainPanel>
 		);
