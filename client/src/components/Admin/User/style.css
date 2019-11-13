@@ -1,0 +1,26 @@
+.userRow {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: left;
+  align-content: flex-start;
+}
+
+.userButton {
+  height: 19px;
+}
+
+.delete {
+  color: red;
+}
+
+.update {
+  color: rgb(225, 120, 82);
+}
+
+.popup-content {
+  font-size: 19px;
+}
+
+.popup-content h1 {
+  color: black;
+}
