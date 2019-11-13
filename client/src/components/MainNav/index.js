@@ -35,6 +35,7 @@ function MainNav() {
 					</Link>
 				</li>
 			</ul>
+			<hr></hr>
 		</div>
 	);
 }

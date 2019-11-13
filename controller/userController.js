@@ -28,5 +28,11 @@ module.exports = {
         console.log(err);
         res.sendStatus(500);
       });
-  }
+  },
+  allTeams: (req, res) => {
+    db.Team.find({})
+      .then(userData => res.json(userData))
+      .catch(err => res.status(422).json(err));
+  },
 };
+
