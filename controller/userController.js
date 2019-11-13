@@ -7,30 +7,24 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   CreateUser: (req, res) => {
-    console.log(req.body);
-
-    db.User.create({
-      fName: req.body.fName,
-      lName: req.body.lName,
-      email: req.body.email,
-      password: req.body.password,
-      userType: parseInt(req.body.userType),
-      teamID: req.body.teamID,
-      plans: []
-    })
-      .then(res => res.send("OKAY!"))
-      .catch(err => res.send(err));
-
-    //TEST WORKS ______\/____
-    // db.User.create({
-    //   fName: "testFirstName",
-    //   lName: "testLastName",
-    //   password: "testPassword",
-    //   userType: 0,
-    //   teamID: "testTeamID",
-    //   plans: []
-    // })
-    //   .then(res => console.log("OKAY!"))
-    //   .catch(err => console.log(err));
+    console.log(req.body.data);
+    db.User.create(req.body.data)
+      .then(dbUser => res.json(dbUser))
+      .catch(err => {
+        console.log(err);
+        res.json(err);
+      });
+  },
+  deleteUser: (req, res) => {
+    const query = req.body;
+    console.log("query", query);
+    db.User.deleteOne(query)
+      .then(success => {
+        res.sendStatus(200);
+      })
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+      });
   }
 };

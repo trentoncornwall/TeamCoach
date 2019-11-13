@@ -14,6 +14,15 @@ class Admin extends Component {
     userData: []
   };
 
+  deleteButtonClick = event => {
+    const id = event.target.id;
+    let data = {
+      _id: id
+    };
+    console.log(data);
+    API.deleteUser(data).then(this.loadUsers());
+  };
+
   handleInputChange = event => {
     const value = event.target.value;
     const name = event.target.name;
@@ -78,6 +87,8 @@ class Admin extends Component {
             fullName={user.fName + " " + user.lName}
             team={user.teamID}
             email={user.email}
+            handleInputChange={this.handleInputChange}
+            delete={this.deleteButtonClick}
           />
         ))}
 

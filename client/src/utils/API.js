@@ -4,7 +4,10 @@ export default {
   getUsers: function() {
     return axios.get("/api/users");
   },
-  postUser: function(user) {
-    return axios.post("/api/users", user);
+  postUser: function(data) {
+    return axios.post("/api/users", { data });
+  },
+  deleteUser: function(data) {
+    return axios.delete("/api/users", { data });
   }
 };
