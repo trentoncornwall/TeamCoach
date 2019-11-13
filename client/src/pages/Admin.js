@@ -9,7 +9,7 @@ class Admin extends Component {
     firstName: "",
     lastName: "",
     userType: 0,
-    username: "",
+    email: "",
     userPassword: "",
     userData: []
   };
@@ -29,21 +29,21 @@ class Admin extends Component {
     if (
       this.state.firstName &&
       this.state.lastName &&
-      this.state.username &&
+      this.state.email &&
       this.state.userPassword &&
       this.state.userType
     ) {
       API.postUser({
         fName: this.state.firstName,
         lName: this.state.lastName,
-        username: this.state.username,
+        email: this.state.email,
         password: this.state.userPassword,
         userType: this.state.userType
       });
       console.log({
         fName: this.state.firstName,
         lName: this.state.lastName,
-        username: this.state.username,
+        email: this.state.email,
         password: this.state.userPassword,
         userType: this.state.userType
       });
@@ -77,7 +77,7 @@ class Admin extends Component {
             type={user.userType}
             fullName={user.fName + " " + user.lName}
             team={user.teamID}
-            username={user.username}
+            email={user.email}
           />
         ))}
 

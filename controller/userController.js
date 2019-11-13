@@ -12,7 +12,7 @@ module.exports = {
     db.User.create({
       fName: req.body.fName,
       lName: req.body.lName,
-      username: req.body.username,
+      email: req.body.email,
       password: req.body.password,
       userType: parseInt(req.body.userType),
       teamID: req.body.teamID,

@@ -31,12 +31,12 @@ function UserCreate(props) {
           <option value="3">Admin (3)</option>
         </select>{" "}
         <br />
-        Username: <br />
+        Email: <br />
         <input
           type="text"
-          name="username"
+          name="email"
           onChange={props.HIC}
-          value={props.state.username}
+          value={props.state.email}
         />
         <br />
         Password: <br />
