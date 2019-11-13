@@ -1,9 +1,31 @@
+.loginTitle {
+    margin: 2px 14px 16px;
+}
+
 .logo {
     width: 80px;
 }
 
 .companyName {
-    color: purple;
+    color: #6301E4;
+}
+
+.loginFieldTitle {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.loginField {
+    width: 98%;
+    height: 35px;
+    border-radius: 10px;
+    background-color: white;
+    color: grey;
+    font-size: 20px;
+    padding: 5px;
+    margin: 2px 0;
+    border: 1px solid grey;
+    box-shadow: 5px 8px 5px #8888886c;
 }
 
 .loginSubmit {
@@ -12,9 +34,19 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: purple;
+    transition: background-color 0.2s ease,
+                border-color 0.2s ease;
+    background-color: #A055F3;
+    border-color: #a055f3;
     color: white;
     opacity: 1.15;
     border-radius: 0 0 30px 30px;
-    border-color: darkmagenta;
+    font-size: 20px;
+}
+
+.loginSubmit:hover {
+    transition: background-color 0.2s ease,
+                border-color 0.2s ease;
+    background-color: #6301E4;
+    border-color: #5202bb;
 }
