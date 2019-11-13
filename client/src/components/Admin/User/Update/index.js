@@ -1,13 +1,22 @@
 import React, { Component } from "react";
 import API from "../../../../utils/API";
+import Axios from "axios";
 
 class UpdateUser extends Component {
   state = {
     userData: []
   };
 
+  getUser = id => {
+    Axios.get("/api/users/" + id).then(data => {
+      console.log(data.data);
+    });
+  };
+
   componentDidMount() {
     console.log("Time to get a call for user data");
+
+    this.getUser(this.props.id);
   }
 
   render() {
