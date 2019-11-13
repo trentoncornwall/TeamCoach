@@ -9,9 +9,10 @@
 	list-style-type: none;
 }
 
-.MainNav hr {
-	width: 100%;
-	position: absolute;
-	left: 50px;
-	width: 50%;
+.nav-link :active {
+	color: rgb(45, 45, 45);
+}
+
+.nav-link :visited {
+	color: rgb(45, 45, 45);
 }
