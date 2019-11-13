@@ -1,0 +1,16 @@
+.LoginPanelBackground {
+	background: rgb(255, 255, 255, 0.95);
+	height: 42%;
+	width: 35%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 30px;
+}
+
+.LoginPanelInfo {
+	opacity: 1;
+	color: grey;
+	padding: 20px;
+}
