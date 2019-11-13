@@ -34,29 +34,35 @@ class Admin extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    // console.log(this.state);
-    if (
-      this.state.firstName &&
-      this.state.lastName &&
-      this.state.email &&
-      this.state.userPassword &&
-      this.state.userType
-    ) {
-      API.postUser({
-        fName: this.state.firstName,
-        lName: this.state.lastName,
-        email: this.state.email,
-        password: this.state.userPassword,
-        userType: this.state.userType
+    console.log("submiting form");
+    API.postUser({
+      fName: this.state.firstName,
+      lName: this.state.lastName,
+      email: this.state.email,
+      password: this.state.userPassword,
+      userType: this.state.userType
+    }).then(() => {
+      this.setState({
+        firstName: "",
+        lastName: "",
+        userType: 0,
+        email: "",
+        userPassword: "",
+        userData: []
       });
-      console.log({
-        fName: this.state.firstName,
-        lName: this.state.lastName,
-        email: this.state.email,
-        password: this.state.userPassword,
-        userType: this.state.userType
-      });
-    }
+      this.loadUsers();
+    });
+    console.log({
+      fName: this.state.firstName,
+      lName: this.state.lastName,
+      email: this.state.email,
+      password: this.state.userPassword,
+      userType: this.state.userType
+    });
+  };
+
+  handleUpate = event => {
+    console.log(event.target.id);
   };
 
   loadUsers = () => {
