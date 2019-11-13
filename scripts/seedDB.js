@@ -9,7 +9,7 @@ const userSeed = [
   {
     fName: "Root",
     lName: "User",
-    email: "ROOT@ROOT.com",
+    email: "user1@gmail.com",
     password: "test",
     userType: 3,
     teamID: "ALL",
@@ -18,7 +18,7 @@ const userSeed = [
   {
     fName: "Super",
     lName: "Virsor",
-    email: "SuperVIRsor",
+    email: "user2@gmail.com",
     password: "test",
     userType: 2,
     teamID: "ALL",
@@ -27,7 +27,7 @@ const userSeed = [
   {
     fName: "Manager",
     lName: "Person",
-    email: "MANAGER",
+    email: "user3@gmail.com",
     password: "test",
     userType: 1,
     teamID: "ALL",
@@ -36,7 +36,7 @@ const userSeed = [
   {
     fName: "Base",
     lName: "User",
-    email: "BASE",
+    email: "user4@gmail.com",
     password: "test",
     userType: 0,
     teamID: "ALL",
@@ -45,7 +45,7 @@ const userSeed = [
   {
     fName: "Base2",
     lName: "User2",
-    email: "BASE2",
+    email: "user5@gmail.com",
     password: "test",
     userType: 0,
     teamID: "ALL",

@@ -1,7 +1,6 @@
 import React from "react";
 import Popup from "reactjs-popup";
 import "./style.css";
-// import "./style.css";
 
 function User(props) {
   return (
@@ -72,4 +71,5 @@ function User(props) {
     </div>
   );
 }
+
 export default User;
