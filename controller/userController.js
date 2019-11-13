@@ -6,12 +6,11 @@ module.exports = {
       .then(userData => res.json(userData))
       .catch(err => res.status(422).json(err));
   },
-  createUser: (req, res) => {
+
+  CreateUser: (req, res) => {
+    console.log(req.body.data);
     db.User.create(req.body.data)
-      //* Need to add a .then to push user to teams, and plans to user
-      .then(dbUser => {
-        res.json(dbUser);
-      })
+      .then(dbUser => res.json(dbUser))
       .catch(err => {
         console.log(err);
         res.json(err);
@@ -19,7 +18,6 @@ module.exports = {
   },
 
   deleteUser: (req, res) => {
-    //! delete by user ID
     const query = req.body;
     console.log("query", query);
     db.User.deleteOne(query)
