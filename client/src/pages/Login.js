@@ -1,7 +1,13 @@
 import React from "react";
+import LoginPanel from "../components/LoginPanel";
+import LoginForm from "../components/LoginForm";
 
 function Login() {
-	return <div>Login PAGE</div>;
+	return (
+	<LoginPanel>
+		<LoginForm />
+	</LoginPanel>
+	)
 }
 
 export default Login;
