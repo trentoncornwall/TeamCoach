@@ -5,15 +5,18 @@ import UserComp from "../components/Admin/User";
 import UserCreate from "../components/Admin/User/Create";
 
 class Admin extends Component {
+  // Create_User States + Store All Users for Render
   state = {
-    firstName: "",
-    lastName: "",
-    userType: 0,
-    email: "",
-    userPassword: "",
+    create_firstName: "",
+    create_lastName: "",
+    create_userType: 0,
+    create_email: "",
+    create_password: "",
+    // ALL USERS
     userData: []
   };
 
+  // Handle Delete User
   deleteButtonClick = event => {
     const id = event.target.id;
     let data = {
@@ -23,48 +26,44 @@ class Admin extends Component {
     API.deleteUser(data).then(this.loadUsers());
   };
 
+  // Handle Input Changes for Create_User
   handleInputChange = event => {
     const value = event.target.value;
     const name = event.target.name;
-
     this.setState({
       [name]: value
     });
   };
 
+  // Handle Submit for Create_User
   handleSubmit = event => {
-    event.preventDefault();
-    console.log("submiting form");
+    event.preventDefault(); //Prevent Refresh
     API.postUser({
-      fName: this.state.firstName,
-      lName: this.state.lastName,
-      email: this.state.email,
-      password: this.state.userPassword,
-      userType: this.state.userType
-    }).then(() => {
-      this.setState({
-        firstName: "",
-        lastName: "",
-        userType: 0,
-        email: "",
-        userPassword: "",
-        userData: []
+      fName: this.state.create_firstName,
+      lName: this.state.create_lastName,
+      email: this.state.create_email,
+      password: this.state.create_password,
+      userType: this.state.create_userType
+    }) //Post User to DB and Clear States
+      .then(() => {
+        this.setState({
+          create_firstName: "",
+          create_lastName: "",
+          create_userType: 0,
+          create_email: "",
+          create_password: "",
+          userData: []
+        });
+        // Reload
+        this.loadUsers();
       });
-      this.loadUsers();
-    });
-    console.log({
-      fName: this.state.firstName,
-      lName: this.state.lastName,
-      email: this.state.email,
-      password: this.state.userPassword,
-      userType: this.state.userType
-    });
   };
 
-  handleUpate = event => {
-    console.log(event.target.id);
-  };
+  // handleUpate = event => {
+  //   console.log(event.target.id);
+  // };
 
+  // Load User Data
   loadUsers = () => {
     API.getUsers()
       .then(data => {
@@ -77,6 +76,7 @@ class Admin extends Component {
       .catch(err => console.log(err));
   };
 
+  // Init Users
   componentDidMount() {
     this.loadUsers();
   }
@@ -89,18 +89,19 @@ class Admin extends Component {
           <UserComp
             id={user._id}
             key={user._id}
-            type={user.userType}
             email={user.email}
             fullName={user.fName + " " + user.lName}
-            team={user.teamID}
+            // Functions Pass
             handleInputChange={this.handleInputChange}
             delete={this.deleteButtonClick}
           />
         ))}
 
         <UserCreate
+          // Functions Pass *different prop names?*
           HIC={this.handleInputChange}
           HS={this.handleSubmit}
+          // Pass State so that values are synced to state at all times
           state={this.state}
         />
       </MainPanel>
