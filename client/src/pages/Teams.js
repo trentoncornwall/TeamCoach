@@ -10,13 +10,14 @@ state = {
 	data: [],
 	teamUsers: []
 }
-onTeamClick(id) {
-	const usersArray = id;
-	this.setState({teamUsers: usersArray})
+onTeamClick(users) {
+	// const usersArray = id;
+	console.log(users);
+	this.setState({teamUsers: users})
 }
 
 getAllTeams() {
-	API.allTeams().then((result) => {
+	API.getTeamUsers().then((result) => {
 		var dataArr = [];
         result.data.forEach(team => {
           dataArr.push(team);
@@ -25,8 +26,16 @@ getAllTeams() {
 		console.log(this.state)
 	})
 }
+
+// getData=()=>{
+// 	API.getTeamUsers().then(data=>{
+// 		console.log(data);
+// 	})
+// }
+
 componentDidMount(){
 	this.getAllTeams();
+	// this.getData();
 }
 	render() {
 		return (
@@ -38,6 +47,8 @@ componentDidMount(){
 							teamName={team.teamName}
 							key={team._id}
 							id={team._id}
+							// users={team.users}
+							// onClick=()
 							onClick={() => this.onTeamClick(team.users)}
           	/>
 					))}
@@ -45,7 +56,7 @@ componentDidMount(){
 				<MainTeamUsers>
 						{this.state.teamUsers.map(user => (
 							<li>
-							{user}
+							{user.fName}
 							</li>
 								
 						))}
