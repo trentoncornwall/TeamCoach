@@ -55,14 +55,24 @@ const userSeed = [
 
 const teamSeed = [
 {
-  teamName: "Blue Berries",
+  teamName: "Alfa",
   supervisor: ["Manager Person"],
-  users: ["Base User","Second USer", "lkjsdflkj asd"]
+  users: ["User One Alfa","User Two Alfa", "User Three Alfa", "User Four Alfa", "User Five Alfa"]
 }, 
 {
-  teamName: "Icey Box",
+  teamName: "Bravo",
   supervisor: ["Super Virsir"],
-  users: ["Base2 User2", "asldkjflaksjdflkj", "aslkdfj"]
+  users: ["User One Bravo","User Two Bravo", "User Three Bravo", "User Four Bravo", "User Five Bravo"]
+}, 
+{
+  teamName: "Charlie",
+  supervisor: ["Super Virsir"],
+  users: ["User One Charlie","User Two Charlie", "User Three Charlie", "User Four Charlie", "User Five Charlie"]
+}, 
+{
+  teamName: "Delta",
+  supervisor: ["Super Virsir"],
+  users: ["User One Delta","User Two Delta", "User Three Delta", "User Four Delta", "User Five Delta"]
 }, 
 
 ]
