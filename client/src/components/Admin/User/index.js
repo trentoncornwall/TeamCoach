@@ -6,7 +6,7 @@ import "./style.css";
 function User(props) {
   return (
     <div className="userRow">
-      <p id={props.id} type={props.type} key={props.id} team={props.team}>
+      <p id={props.id}>
         {props.fullName} (Email: {props.email})
       </p>
       <button
