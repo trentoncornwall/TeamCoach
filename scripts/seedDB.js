@@ -54,18 +54,17 @@ const userSeed = [
 ];
 
 const teamSeed = [
-{
-  teamName: "Blue Berries",
-  supervisor: ["Manager Person"],
-  users: ["Base User","Second USer", "lkjsdflkj asd"]
-}, 
-{
-  teamName: "Icey Box",
-  supervisor: ["Super Virsir"],
-  users: ["Base2 User2", "asldkjflaksjdflkj", "aslkdfj"]
-}, 
-
-]
+  {
+    teamName: "Blue Berries",
+    supervisor: ["123123123"],
+    users: []
+  },
+  {
+    teamName: "Icey Box",
+    supervisor: ["12321323"],
+    users: []
+  }
+];
 db.Team.remove({})
   .then(() => db.Team.collection.insertMany(teamSeed))
   .then(data => {

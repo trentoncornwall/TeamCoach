@@ -20,7 +20,8 @@ app.use(routes);
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/teamcoach", {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 });
 
 // Send every other request to the React app
