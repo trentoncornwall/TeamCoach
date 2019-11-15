@@ -1,12 +1,23 @@
 .userContainer {
     grid-area: MainTeamUsers;
-    width: 450px;
+    width: auto;
     height: 100%;
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    /* padding: 5px;
+    margin: 10px; */
+    cursor: pointer;
+    
+    
 }
 
-.userName {
-    font-size: 18px;
+.team-member-name {
+    font-size: 20px;
     width: 100%;
+    color:  #A055F3;
+    text-decoration: none;
+    list-style-type: none;
+    padding: 10px;
+   
 }
+
