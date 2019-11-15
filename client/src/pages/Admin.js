@@ -3,6 +3,7 @@ import API from "../utils/API";
 import MainPanel from "../components/MainPanel";
 import UserComp from "../components/Admin/User";
 import UserCreate from "../components/Admin/User/Create";
+import TeamCreate from "../components/Admin/Team/Create";
 
 class Admin extends Component {
   // Create_User States + Store All Users for Render
@@ -12,8 +13,27 @@ class Admin extends Component {
     create_userType: 0,
     create_email: "",
     create_password: "",
+    create_teamID: "",
+
+    create_teamName: "",
     // ALL USERS
-    userData: []
+    userData: [],
+    teamData: []
+  };
+
+  refresh = () => {
+    this.setState({
+      create_firstName: "",
+      create_lastName: "",
+      create_userType: 0,
+      create_email: "",
+      create_password: "",
+      create_teamName: "",
+      userData: []
+    });
+
+    this.loadTeams();
+    this.loadUsers();
   };
 
   // Handle Delete User
@@ -23,7 +43,7 @@ class Admin extends Component {
       _id: id
     };
     console.log(data);
-    API.deleteUser(data).then(this.loadUsers());
+    API.deleteUser(data).then(this.refresh());
   };
 
   // Handle Input Changes for Create_User
@@ -35,28 +55,37 @@ class Admin extends Component {
     });
   };
 
+  handleTeamSubmit = event => {
+    event.preventDefault();
+    API.createTeam({
+      teamName: this.state.create_teamName
+    }).then(() => {
+      // console.log("team created");
+      this.refresh();
+    });
+  };
+
   // Handle Submit for Create_User
   handleSubmit = event => {
     event.preventDefault(); //Prevent Refresh
-    API.postUser({
-      fName: this.state.create_firstName,
-      lName: this.state.create_lastName,
-      email: this.state.create_email,
-      password: this.state.create_password,
-      userType: this.state.create_userType
-    }) //Post User to DB and Clear States
+    API.postUser(
+      {
+        fName: this.state.create_firstName,
+        lName: this.state.create_lastName,
+        email: this.state.create_email,
+        password: this.state.create_password,
+        userType: this.state.create_userType
+      },
+      this.state.create_teamID
+    ) //Post User to DB and Clear States
       .then(() => {
-        this.setState({
-          create_firstName: "",
-          create_lastName: "",
-          create_userType: 0,
-          create_email: "",
-          create_password: "",
-          userData: []
-        });
         // Reload
-        this.loadUsers();
+        this.refresh();
       });
+    // API.insertUser({
+
+    // create_teaminsert: "",
+    // })
   };
 
   // handleUpate = event => {
@@ -76,9 +105,24 @@ class Admin extends Component {
       .catch(err => console.log(err));
   };
 
+  loadTeams = () => {
+    API.allTeams()
+      .then(data => {
+        var dataArr = [];
+        data.data.forEach(user => {
+          dataArr.push(user);
+        });
+        this.setState({ teamData: dataArr });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   // Init Users
   componentDidMount() {
     this.loadUsers();
+    this.loadTeams();
   }
 
   render() {
@@ -102,6 +146,11 @@ class Admin extends Component {
           HIC={this.handleInputChange}
           HS={this.handleSubmit}
           // Pass State so that values are synced to state at all times
+          state={this.state}
+        />
+        <TeamCreate
+          HIC={this.handleInputChange}
+          HTS={this.handleTeamSubmit}
           state={this.state}
         />
       </MainPanel>
