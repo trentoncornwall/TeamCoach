@@ -7,6 +7,12 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
+  findOne: (req, res) => {
+    db.User.find({ _id: req.params.user })
+      .then(userData => res.json(userData))
+      .catch(err => res.status(422).json(err));
+  },
+
   CreateUser: (req, res) => {
     console.log(req.body.data);
     db.User.create(req.body.data)
@@ -33,6 +39,5 @@ module.exports = {
     db.Team.find({})
       .then(userData => res.json(userData))
       .catch(err => res.status(422).json(err));
-  },
+  }
 };
-

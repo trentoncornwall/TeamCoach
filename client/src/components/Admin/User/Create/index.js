@@ -7,23 +7,23 @@ function UserCreate(props) {
         First Name: <br />
         <input
           type="text"
-          name="firstName"
+          name="create_firstName"
           onChange={props.HIC}
-          value={props.state.firstName}
+          value={props.state.create_firstName}
         />
         <br />
         Last Name: <br />
         <input
           type="text"
-          name="lastName"
+          name="create_lastName"
           onChange={props.HIC}
-          value={props.state.lastName}
+          value={props.state.create_lastName}
         />
         <br />
         <select
-          name="userType"
+          name="create_userType"
           onChange={props.HIC}
-          value={props.state.userType}
+          value={props.state.create_userType}
         >
           <option value="0">Base (0)</option>
           <option value="1">Supervisor (1)</option>
@@ -34,17 +34,17 @@ function UserCreate(props) {
         Email: <br />
         <input
           type="text"
-          name="email"
+          name="create_email"
           onChange={props.HIC}
-          value={props.state.email}
+          value={props.state.create_email}
         />
         <br />
         Password: <br />
         <input
           type="password"
-          name="userPassword"
+          name="create_password"
           onChange={props.HIC}
-          value={props.state.userPassword}
+          value={props.state.create_password}
         />
         <input type="submit" value="Submit" onClick={props.HS} />
       </form>
