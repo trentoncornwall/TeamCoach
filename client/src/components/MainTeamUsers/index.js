@@ -6,7 +6,7 @@ import "./style.css";
 const MainTeamUsers = ({ children }) => {
     return (
         <div className="userContainer">
-            <ul>{children}
+            <ul className="team-member-name">{children}
             </ul>
             
         </div>
