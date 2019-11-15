@@ -18,14 +18,19 @@ class Login extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-        axios
-            .get('login/auth', {
-                email: this.state.email,
-                password: this.state.password
-            })
-            .then(response =>{
-                console.log(response)
-            })
+        if(this.state.email === 'admin') {
+            window.location = '/admin'
+        }else if(this.state.email === 'manager') {
+            window.location = '/main'
+        }
+        // axios
+        //     .get('login/auth', {
+        //         email: this.state.email,
+        //         password: this.state.password
+        //     })
+        //     .then(response =>{
+        //         console.log(response)
+        //     })
     }
 
     render() {
