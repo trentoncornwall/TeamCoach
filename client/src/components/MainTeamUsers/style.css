@@ -1,0 +1,12 @@
+.userContainer {
+    grid-area: MainTeamUsers;
+    width: 450px;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.userName {
+    font-size: 18px;
+    width: 100%;
+}
