@@ -1,5 +1,7 @@
 .MainNav {
-	width: 500px;
+	grid-area: MainNav;
+	width: 100%;
+	
 }
 
 .MainNav li {
@@ -7,15 +9,20 @@
 	font-size: 25px;
 	display: inline;
 	list-style-type: none;
+
 }
 
 .nav-link :active {
 	color: rgb(45, 45, 45);
+	text-decoration: none;
+	
 }
 
 .nav-link :visited {
 	color: rgb(45, 45, 45);
+	
 }
 hr {
 	width: 100%;
 }
+

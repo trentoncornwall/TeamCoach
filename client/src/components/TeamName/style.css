@@ -1,0 +1,22 @@
+.team-list {
+width: 350px;
+}
+.team-name {
+    cursor: pointer;
+    margin: 5px;
+    padding: 5px;
+    height: 100%;
+    width: 350px;
+    font-size: 26px;
+    text-decoration: none;
+}
+.team-name-div {
+     width: 250px;
+    height: 100%;
+    
+}
+.team-name:hover {
+    /* background-color:  */
+
+
+}

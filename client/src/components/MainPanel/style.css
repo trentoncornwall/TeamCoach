@@ -15,4 +15,10 @@
   opacity: 1;
   color: grey;
   padding: 20px;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 
+  "MainNav MainNav"
+  "TeamList MainTeamUsers";
 }
