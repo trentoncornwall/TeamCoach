@@ -7,11 +7,21 @@ class Login extends Component {
         password: ""
     }
     
+    componentDidMount() {
+
+    }
+
     handleInputChange = event => {
         const{name,value} = event.target
         this.setState({
             [name]: value
         })
+    }
+
+    handleFormSubmit = event => {
+        event.preventDefault();
+        console.log(this.state.userName)
+        console.log(this.state.password)
     }
 
     render() {
@@ -22,8 +32,8 @@ class Login extends Component {
                     <p className="loginFieldTitle" >User Name:</p>
                     <input type="text" className="loginField" name="userName" value={this.state.userName} onChange={this.handleInputChange}></input>
                     <p className="loginFieldTitle" >Password:</p>
-                    <input type="password" className="loginField" name="passWord" value={this.state.passWord} onChange={this.handleInputChange}></input>
-                    <input type="submit" value="Login" className="loginSubmit"></input>
+                    <input type="password" className="loginField" name="password" value={this.state.password} onChange={this.handleInputChange}></input>
+                    <input type="submit" value="Login" className="loginSubmit" onClick={this.handleFormSubmit}></input>
                 </form>
             </div>
         );
