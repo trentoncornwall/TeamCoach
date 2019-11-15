@@ -59,6 +59,11 @@ module.exports = {
         console.log(err);
         res.json(err);
       });
+  },
+  getTeamUsers: (req, res) => {
+    db.Team.find({}).populate("users")
+      .then(userData => res.json(userData))
+      .catch(err => res.status(422).json(err));
   }
   // insertUser: (req,res)=>{
   //   db.Team.findOneAndUpdate({_id: req.body.teamID},{users: req.})
