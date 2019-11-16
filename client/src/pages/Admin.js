@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-import MainPanel from "../components/MainPanel";
+import AdminPanel from "../components/Admin/AdminPanel";
 import UserComp from "../components/Admin/User";
 import UserCreate from "../components/Admin/User/Create";
 import TeamCreate from "../components/Admin/Team/Create";
@@ -127,7 +127,7 @@ class Admin extends Component {
 
   render() {
     return (
-      <MainPanel>
+      <AdminPanel>
         <h1>Admin</h1>
         {this.state.userData.map(user => (
           <UserComp
@@ -153,7 +153,7 @@ class Admin extends Component {
           HTS={this.handleTeamSubmit}
           state={this.state}
         />
-      </MainPanel>
+      </AdminPanel>
     );
   }
 }
