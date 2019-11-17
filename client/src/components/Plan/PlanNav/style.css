@@ -1,0 +1,17 @@
+.PlanNav {
+  border-bottom: 1px solid rgb(161, 161, 161);
+  margin-bottom: 10px;
+}
+
+.PlanNav span {
+  padding-right: 19px;
+}
+
+.name {
+  font-size: 23px;
+  color: #a055f3;
+}
+
+.date {
+  font-size: 19px;
+}

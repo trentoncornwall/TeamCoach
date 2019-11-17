@@ -1,0 +1,29 @@
+.week {
+  width: 100%;
+  height: 140px;
+  border: 2px solid #a055f3;
+  border-radius: 9px;
+  margin-bottom: 14px;
+}
+
+.week span {
+  padding: 5px;
+}
+
+.weekNav {
+  display: flex;
+  margin-bottom: 7px;
+  justify-content: flex-start;
+  align-content: center;
+  height: 27px;
+  width: 100%;
+  background-color: #6301e4;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+.weekNav span {
+  color: white;
+  padding-left: 10px;
+  font-size: 19px;
+}
