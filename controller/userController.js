@@ -81,11 +81,12 @@ module.exports = {
         return db.User.findOneAndUpdate(
           { _id: req.params.id },
           { $push: { plans: dbPlan._id } },
-          { new: false }
+          { new: true }
         );
       })
-      .then(() => {
-        res.sendStatus(200);
+      .then(data => {
+        console.log(data);
+        res.send(data);
       })
       .catch(err => {
         console.log(err);
