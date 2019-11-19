@@ -3,10 +3,11 @@ const path = require("path");
 const PORT = process.env.PORT || 8080;
 const app = express();
 const routes = require("./routes");
-
+const cookieSession = require("cookie-session");
 const mongoose = require("mongoose");
-const session = require("express-sessions");
 const passport = require('passport');
+const keys = require("./config/keys");
+require("./services/passport");
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -20,12 +21,15 @@ if (process.env.NODE_ENV === "production") {
 // Define API routes here
 app.use(routes);
 
-// Express Sessions Setup
-app.use(session({
-  secret: 'thisisasecret',
-  saveUninitialized: false,
-  resave: false
-}))
+app.use(
+  cookieSession({
+    maxAge: 45 * 24 * 60 * 60 * 1000,
+    keys: [keys.cookieKey]
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/teamcoach", {
   useNewUrlParser: true,
