@@ -5,6 +5,8 @@ const app = express();
 const routes = require("./routes");
 
 const mongoose = require("mongoose");
+const session = require("express-sessions");
+const passport = require('passport');
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -17,6 +19,13 @@ if (process.env.NODE_ENV === "production") {
 
 // Define API routes here
 app.use(routes);
+
+// Express Sessions Setup
+app.use(session({
+  secret: 'thisisasecret',
+  saveUninitialized: false,
+  resave: false
+}))
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/teamcoach", {
   useNewUrlParser: true,
