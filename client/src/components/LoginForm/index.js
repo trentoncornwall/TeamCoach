@@ -19,21 +19,13 @@ class Login extends Component {
     event.preventDefault();
     // Check required fields
     if(!this.state.email || !this.state.password ) {
-      this.setState({error: "Please enter your information"})
+      this.setState({error: "Please fill out all fields"})
     }
     if (this.state.email === "admin") {
       window.location = "/admin";
     } else if (this.state.email === "manager") {
       window.location = "/main";
     }
-    // axios
-    //     .get('login/auth', {
-    //         email: this.state.email,
-    //         password: this.state.password
-    //     })
-    //     .then(response =>{
-    //         console.log(response)
-    //     })
   };
 
   render() {
