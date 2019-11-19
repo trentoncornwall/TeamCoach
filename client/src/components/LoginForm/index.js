@@ -4,7 +4,8 @@ import "./index.css";
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    error: ""
   };
 
   handleInputChange = event => {
@@ -16,6 +17,10 @@ class Login extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
+    // Check required fields
+    if(!this.state.email || !this.state.password ) {
+      this.setState({error: "Please enter your information"})
+    }
     if (this.state.email === "admin") {
       window.location = "/admin";
     } else if (this.state.email === "manager") {
@@ -38,6 +43,7 @@ class Login extends Component {
           <img src="./images/logo.svg" alt="Logo" className="logo" /> Team
           <span className="companyName">Coach</span>
         </h1>
+        <span className="loginError">{this.state.error}</span>
         <form>
           <p className="loginFieldTitle">User Name:</p>
           <input
