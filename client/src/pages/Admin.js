@@ -4,6 +4,7 @@ import AdminPanel from "../components/Admin/AdminPanel";
 import UserComp from "../components/Admin/User";
 import UserCreate from "../components/Admin/User/Create";
 import TeamCreate from "../components/Admin/Team/Create";
+const bcrypt = require("bcryptjs");
 
 class Admin extends Component {
   // Create_User States + Store All Users for Render
@@ -68,6 +69,15 @@ class Admin extends Component {
   // Handle Submit for Create_User
   handleSubmit = event => {
     event.preventDefault(); //Prevent Refresh
+    this.hashPassword(this.state.create_password)
+    
+    // API.insertUser({
+
+    // create_teaminsert: "",
+    // })
+  };
+
+  postUser=()=>{
     API.postUser(
       {
         fName: this.state.create_firstName,
@@ -82,15 +92,18 @@ class Admin extends Component {
         // Reloa
         this.refresh();
       });
-    // API.insertUser({
+  }
 
-    // create_teaminsert: "",
-    // })
-  };
-
-  // handleUpate = event => {
-  //   console.log(event.target.id);
-  // };
+hashPassword = (password) => {
+  const that = this
+  bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(password, salt, function(err, hash) {
+      that.setState({create_password: hash},()=>{
+        that.postUser();
+      });
+    })
+  })
+}
 
   // Load User Data
   loadUsers = () => {
