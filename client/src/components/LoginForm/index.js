@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import API from "../../utils/API"
 import "./index.css";
 
 class Login extends Component {
@@ -21,11 +22,22 @@ class Login extends Component {
     if(!this.state.email || !this.state.password ) {
       this.setState({error: "Please fill out all fields"})
     }
-    if (this.state.email === "admin") {
-      window.location = "/admin";
-    } else if (this.state.email === "manager") {
-      window.location = "/main";
-    }
+    // if (this.state.email === "admin") {
+    //   window.location = "/admin";
+    // } else if (this.state.email === "manager") {
+    //   window.location = "/main";
+    // }
+    API.checkLogin(
+      {
+      user: this.state.email,
+      password: this.state.password
+      },
+      this.state.email
+    ).then((res) => {
+      console.log(res)
+    }).catch(e => {
+      console.log(e.response.data)
+    })
   };
 
   render() {

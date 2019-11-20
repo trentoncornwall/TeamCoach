@@ -105,14 +105,6 @@ hashPassword = (password) => {
   })
 }
 
-// setHashPassword = (hash) => {
-//   this.setState({create_password: hash})
-// };
-
-  // handleUpate = event => {
-  //   console.log(event.target.id);
-  // };
-
   // Load User Data
   loadUsers = () => {
     API.getUsers()
