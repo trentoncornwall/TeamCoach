@@ -3,6 +3,7 @@ import PlanPanel from "../components/Plan/PlanPanel";
 import PlanNav from "../components/Plan/PlanNav";
 import SimpleContainer from "../components/Plan/SimpleContainer";
 import Week from "../components/Plan/Week";
+import API from "../utils/API";
 
 class Plans extends Component {
   state = {
@@ -25,6 +26,17 @@ class Plans extends Component {
   };
 
   handlePlanCreate = event => {};
+
+  getData = () => {
+    API.getPlan(this.props.match.params.id).then(res => {
+      console.log(res.data[0]);
+    });
+  };
+
+  componentDidMount() {
+    this.getData();
+    // console.log(this.props.match.params.id);
+  }
 
   render() {
     return (

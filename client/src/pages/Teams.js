@@ -68,10 +68,7 @@ class Teams extends Component {
   }
 
   displayPlans(plans) {
-    console.log("PLANS: ", plans);
     this.setState({ currentUserPlans: plans });
-
-    console.log("UPDATED CURRENT USER STATE", this.state.currentUserPlans);
   }
 
   getAllTeams() {
@@ -98,8 +95,6 @@ class Teams extends Component {
               teamName={team.teamName}
               key={team._id}
               id={team._id}
-              // users={team.users}
-              // onClick=()
               onClick={() => this.onTeamClick(team.users)}
             />
           ))}
