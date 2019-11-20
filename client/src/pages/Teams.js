@@ -25,7 +25,6 @@ class Teams extends Component {
 
   checkPlans() {
     if (this.state.currentUserPlans.length === 0) {
-      console.log(`Creating new plan`);
       API.postPlan(
         {
           focusArea: {
@@ -53,7 +52,8 @@ class Teams extends Component {
 
   onUserClick(plans, userId) {
     this.setState({ currentUser: userId, currentUserPlans: plans }, () =>
-      this.checkPlans()
+      // this.checkPlans()
+      console.log(plans)
     );
   }
 
@@ -88,16 +88,20 @@ class Teams extends Component {
           ))}
         </TeamList>
         <MainTeamUsers>
-          {this.state.teamUsers.map(user => (
-            <li
-              key={user._id}
-              onClick={() => {
-                this.onUserClick(user.plans, user._id);
-              }}
-            >
-              {user.fName}
-            </li>
-          ))}
+          {this.state.currentUser === ""
+            ? this.state.teamUsers.map(user => (
+                <li
+                  key={user._id}
+                  onClick={() => {
+                    this.onUserClick(user.plans, user._id);
+                  }}
+                >
+                  {user.fName}
+                </li>
+              ))
+            : this.state.currentUserPlans.map(plan => (
+                <li key={plan}>{plan}</li>
+              ))}
         </MainTeamUsers>
       </MainPanel>
     );

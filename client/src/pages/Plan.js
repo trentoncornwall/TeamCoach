@@ -19,7 +19,8 @@ class Plans extends Component {
         coach: "",
         result: ""
       },
-      { weekNumber: 2, id: "asdsdfasd", planning: "", coach: "", result: "" }
+      { weekNumber: 2, id: "asdsdfasd", planning: "", coach: "", result: "" },
+      { weekNumber: 3, id: "asdsdfasd", planning: "", coach: "", result: "" }
     ]
   };
 

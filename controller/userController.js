@@ -92,5 +92,11 @@ module.exports = {
         console.log(err);
         res.json(err);
       });
+  },
+
+  getPlan: (req, res) => {
+    db.Plan.find({ _id: req.params.id })
+      .then(planData => res.json(planData))
+      .catch(err => res.status(422).json(err));
   }
 };
