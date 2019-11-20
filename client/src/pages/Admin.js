@@ -89,7 +89,7 @@ class Admin extends Component {
       this.state.create_teamID
     ) //Post User to DB and Clear States
       .then(() => {
-        // Reload
+        // Reloa
         this.refresh();
       });
   }

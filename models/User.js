@@ -8,7 +8,12 @@ const UserSchema = new Schema({
   password: { type: String, required: true },
   userType: { type: Number, required: true, default: 0 },
   teamID: String,
-  plans: []
+  plans: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Plan"
+    }
+  ]
 });
 
 const User = mongoose.model("User", UserSchema);

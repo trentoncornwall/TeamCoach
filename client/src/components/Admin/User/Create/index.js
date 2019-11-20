@@ -55,7 +55,9 @@ function UserCreate(props) {
             Select Team
           </option>
           {props.state.teamData.map(team => (
-            <option value={team._id}>{team.teamName}</option>
+            <option value={team._id} key={team._id}>
+              {team.teamName}
+            </option>
           ))}
         </select>
         <input type="submit" value="Submit" onClick={props.HS} />

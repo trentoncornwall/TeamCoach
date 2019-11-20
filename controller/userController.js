@@ -1,6 +1,8 @@
 const db = require("../models");
 
 module.exports = {
+  //! USERS ///////////////////////////////////////////
+
   findAll: (req, res) => {
     db.User.find({})
       .then(userData => res.json(userData))
@@ -47,11 +49,15 @@ module.exports = {
         res.sendStatus(500);
       });
   },
+
+  //! TEAMS /////////////////////////////////////////////
+
   allTeams: (req, res) => {
     db.Team.find({})
       .then(userData => res.json(userData))
       .catch(err => res.status(422).json(err));
   },
+
   createTeam: (req, res) => {
     db.Team.create(req.body.data)
       .then(dbTeam => res.json(dbTeam))
@@ -60,12 +66,31 @@ module.exports = {
         res.json(err);
       });
   },
+
   getTeamUsers: (req, res) => {
-    db.Team.find({}).populate("users")
+    db.Team.find({})
+      .populate("users")
       .then(userData => res.json(userData))
       .catch(err => res.status(422).json(err));
+  },
+  //! PLANS ////////////////////////////////////////////////
+
+  createPlan: (req, res) => {
+    db.Plan.create(req.body.data)
+      .then(dbPlan => {
+        return db.User.findOneAndUpdate(
+          { _id: req.params.id },
+          { $push: { plans: dbPlan._id } },
+          { new: true }
+        );
+      })
+      .then(data => {
+        console.log(data);
+        res.send(data);
+      })
+      .catch(err => {
+        console.log(err);
+        res.json(err);
+      });
   }
-  // insertUser: (req,res)=>{
-  //   db.Team.findOneAndUpdate({_id: req.body.teamID},{users: req.})
-  // }
 };

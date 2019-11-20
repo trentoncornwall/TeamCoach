@@ -19,7 +19,10 @@ export default {
   createTeam: function(data) {
     return axios.post("/api/teams", { data });
   },
-  getTeamUsers: function(data){
-    return axios.get("/api/teams/users")
+  getTeamUsers: function(data) {
+    return axios.get("/api/teams/users");
+  },
+  postPlan: function(data, id) {
+    return axios.post("/api/plans/" + id, { data });
   }
 };
