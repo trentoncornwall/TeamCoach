@@ -14,8 +14,6 @@ class Teams extends Component {
   };
 
   onTeamClick(users) {
-    // const usersArray = id;
-    // console.log(users);
     this.setState({ teamUsers: users });
   }
 
@@ -26,8 +24,6 @@ class Teams extends Component {
   };
 
   checkPlans() {
-    // console.log(`Checking User Plan Count`);
-    // console.log(this.state.currentUserPlans);
     if (this.state.currentUserPlans.length === 0) {
       console.log(`Creating new plan`);
       API.postPlan(
@@ -56,18 +52,9 @@ class Teams extends Component {
   }
 
   onUserClick(plans, userId) {
-    // console.log(`Checking Plans`);
-    // console.log(plans);
-    // console.log("useid", userId);
-    // console.log("Pre State");
-    // console.log(this.state.currentUserPlans);
     this.setState({ currentUser: userId, currentUserPlans: plans }, () =>
       this.checkPlans()
     );
-    // API.insertUser({
-
-    // create_teaminsert: "",
-    // })
   }
 
   getAllTeams() {
@@ -83,7 +70,6 @@ class Teams extends Component {
 
   componentDidMount() {
     this.getAllTeams();
-    // this.getData();
   }
   render() {
     return (
