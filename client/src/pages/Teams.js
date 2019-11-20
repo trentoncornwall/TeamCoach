@@ -30,8 +30,7 @@ class Teams extends Component {
           focusArea: {
             uBehavior: "placeholder",
             dBehavior: "dplaceholder"
-          },
-          blahblah: "yes"
+          }
         },
         this.state.currentUser
       ) //Post User to DB and Clear States
@@ -112,7 +111,9 @@ class Teams extends Component {
                 </li>
               ))
             : this.state.currentUserPlans.map(plan => (
-                <li key={plan._id}>{plan._id}</li>
+                <li key={plan._id}>
+                  <a href={"/plan/" + plan._id}>{plan._id}</a>
+                </li>
               ))}
         </MainTeamUsers>
       </MainPanel>

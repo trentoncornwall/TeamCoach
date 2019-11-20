@@ -14,7 +14,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/main" component={Main} />
-          <Route path="/plan/:id" component={Plan} />
+          <Route exact path="/plan/:id" component={Plan} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/teams" component={Teams} />
           <Route component={NoMatch} />
