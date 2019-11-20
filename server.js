@@ -5,6 +5,7 @@ const app = express();
 const routes = require("./routes");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const passport = require("passport");
 
 
 // Define middleware here
@@ -18,7 +19,13 @@ if (process.env.NODE_ENV === "production") {
 
 // Bodyparser middleware
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
+// Passport Middleware
+app.use(passport.initialize());
+
+// Passport config
+require("./services/passport");
 // Define API routes here
 app.use(routes);
 

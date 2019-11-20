@@ -1,4 +1,5 @@
 const db = require("../models");
+const bcrypt = require("bcryptjs");
 
 module.exports = {
   //! USERS ///////////////////////////////////////////
@@ -92,5 +93,25 @@ module.exports = {
         console.log(err);
         res.json(err);
       });
+  },
+  //! LOGIN ///////////////////////////////////////////////
+  checkLogin: (req, res) => {
+    db.User.findOne({email: req.params.user})
+      .then(user => {
+        if(!user) {
+          return res.status(404).json({ emailnotfound: "Email not found" });
+        }
+        bcrypt.compare(req.body.password, user.password).then(isMatch => {
+          if (isMatch) {
+            //User Matched
+            // Create JWT Payload
+            const payload = {
+              id: user._id,
+              name: user.email
+            }
+            console.log(payload);
+          }
+        })
+      })
   }
 };

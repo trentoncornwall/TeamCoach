@@ -24,5 +24,8 @@ export default {
   },
   postPlan: function(data, id) {
     return axios.post("/api/plans/" + id, { data });
+  },
+  checkLogin: function(user) {
+    return axios.get("/api/login/" + user);
   }
 };
