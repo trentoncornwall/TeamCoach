@@ -96,6 +96,14 @@ module.exports = {
         res.json(err);
       });
   },
+
+
+  getPlan: (req, res) => {
+    db.Plan.find({ _id: req.params.id })
+      .then(planData => res.json(planData))
+      .catch(err => res.status(422).json(err));
+  },
+
   //! LOGIN ///////////////////////////////////////////////
   checkLogin: (req, res) => {
     db.User.findOne({email: req.body.data.user})
@@ -131,5 +139,4 @@ module.exports = {
           }
         })
       })
-  }
 };

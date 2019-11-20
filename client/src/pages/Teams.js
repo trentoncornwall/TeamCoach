@@ -25,14 +25,12 @@ class Teams extends Component {
 
   checkPlans() {
     if (this.state.currentUserPlans.length === 0) {
-      console.log(`Creating new plan`);
       API.postPlan(
         {
           focusArea: {
             uBehavior: "placeholder",
             dBehavior: "dplaceholder"
-          },
-          blahblah: "yes"
+          }
         },
         this.state.currentUser
       ) //Post User to DB and Clear States
@@ -51,10 +49,25 @@ class Teams extends Component {
     }
   }
 
-  onUserClick(plans, userId) {
-    this.setState({ currentUser: userId, currentUserPlans: plans }, () =>
-      this.checkPlans()
+  onUserClick(plans) {
+    // this.setState({ currentUser: userId, currentUserPlans: plans }, () =>
+    //   // this.checkPlans()
+    //   console.log(plans)
+    // );
+    let userPlans = [];
+    plans.forEach(projectId =>
+      API.getPlan(projectId).then(result => {
+        userPlans.push(result.data[0]);
+        if (userPlans.length === plans.length) {
+          // displays all of the user's plans now
+          this.displayPlans(userPlans);
+        }
+      })
     );
+  }
+
+  displayPlans(plans) {
+    this.setState({ currentUserPlans: plans });
   }
 
   getAllTeams() {
@@ -81,23 +94,27 @@ class Teams extends Component {
               teamName={team.teamName}
               key={team._id}
               id={team._id}
-              // users={team.users}
-              // onClick=()
               onClick={() => this.onTeamClick(team.users)}
             />
           ))}
         </TeamList>
         <MainTeamUsers>
-          {this.state.teamUsers.map(user => (
-            <li
-              key={user._id}
-              onClick={() => {
-                this.onUserClick(user.plans, user._id);
-              }}
-            >
-              {user.fName}
-            </li>
-          ))}
+          {this.state.currentUserPlans.length === 0
+            ? this.state.teamUsers.map(user => (
+                <li
+                  key={user._id}
+                  onClick={() => {
+                    this.onUserClick(user.plans, user._id);
+                  }}
+                >
+                  {user.fName}
+                </li>
+              ))
+            : this.state.currentUserPlans.map(plan => (
+                <li key={plan._id}>
+                  <a href={"/plan/" + plan._id}>{plan._id}</a>
+                </li>
+              ))}
         </MainTeamUsers>
       </MainPanel>
     );
