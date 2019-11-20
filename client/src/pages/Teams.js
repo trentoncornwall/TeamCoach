@@ -50,11 +50,28 @@ class Teams extends Component {
     }
   }
 
-  onUserClick(plans, userId) {
-    this.setState({ currentUser: userId, currentUserPlans: plans }, () =>
-      // this.checkPlans()
-      console.log(plans)
+  onUserClick(plans) {
+    // this.setState({ currentUser: userId, currentUserPlans: plans }, () =>
+    //   // this.checkPlans()
+    //   console.log(plans)
+    // );
+    let userPlans = [];
+    plans.forEach(projectId =>
+      API.getPlan(projectId).then(result => {
+        userPlans.push(result.data[0]);
+        if (userPlans.length === plans.length) {
+          // displays all of the user's plans now
+          this.displayPlans(userPlans);
+        }
+      })
     );
+  }
+
+  displayPlans(plans) {
+    console.log("PLANS: ", plans);
+    this.setState({ currentUserPlans: plans });
+
+    console.log("UPDATED CURRENT USER STATE", this.state.currentUserPlans);
   }
 
   getAllTeams() {
@@ -88,7 +105,7 @@ class Teams extends Component {
           ))}
         </TeamList>
         <MainTeamUsers>
-          {this.state.currentUser === ""
+          {this.state.currentUserPlans.length === 0
             ? this.state.teamUsers.map(user => (
                 <li
                   key={user._id}
@@ -100,7 +117,7 @@ class Teams extends Component {
                 </li>
               ))
             : this.state.currentUserPlans.map(plan => (
-                <li key={plan}>{plan}</li>
+                <li key={plan._id}>{plan._id}</li>
               ))}
         </MainTeamUsers>
       </MainPanel>
