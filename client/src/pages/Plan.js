@@ -23,6 +23,8 @@ class Plans extends Component {
     ]
   };
 
+  handlePlanCreate = event => {};
+
   render() {
     return (
       <PlanPanel>

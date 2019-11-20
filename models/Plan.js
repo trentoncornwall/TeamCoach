@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const PlanSchema = new Schema({
   archived: { type: Boolean, default: false },
-  startDate: { type: Date, required: true },
-  endDate: { type: Date, required: true },
+  // startDate: { type: Date, required: true },
+  // endDate: { type: Date, required: true },
   focusArea: {
     uBehavior: String,
     dBehavior: String,
