@@ -1,9 +1,11 @@
 .week {
   width: 100%;
-  height: 140px;
+  height: auto;
+  padding-bottom: 10px;
   border: 2px solid #a055f3;
   border-radius: 9px;
   margin-bottom: 14px;
+  position: relative;
 }
 
 .week span {
@@ -26,4 +28,18 @@
   color: white;
   padding-left: 10px;
   font-size: 19px;
+}
+
+.saveBTN {
+  background-color: #a055f3;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  font-size: 24px;
+  border-radius: 10px;
+  color: white;
 }

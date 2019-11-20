@@ -14,14 +14,19 @@ class Plans extends Component {
     // When we build out plans API calls, we'll have to do a count on the current of weeks so we can set week number
     Weeks: [
       {
-        weekNumber: 1,
-        id: "asdfasasdf",
-        planning: "",
-        coach: "",
-        result: ""
+        weekNumber: 0,
+        planning: "Do Something",
+        coach: "U SUCK",
+        employee: "NO U",
+        results: "1/10"
       },
-      { weekNumber: 2, id: "asdsdfasd", planning: "", coach: "", result: "" },
-      { weekNumber: 3, id: "asdsdfasd", planning: "", coach: "", result: "" }
+      {
+        weekNumber: 1,
+        planning: "U GOOD",
+        coach: "CHIEF!",
+        employee: "WAT",
+        results: "-1/10"
+      }
     ]
   };
 
@@ -45,7 +50,7 @@ class Plans extends Component {
         <SimpleContainer focusArea={this.state.FocusArea} />
         <SimpleContainer focusArea={this.state.RootCause} />
         {this.state.Weeks.map(week => (
-          <Week key={week.id} id={week.id} week={week} />
+          <Week key={week.weekNumber} week={week} />
         ))}
       </PlanPanel>
     );
