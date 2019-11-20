@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import API from "../../utils/API"
 import "./index.css";
 
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    error: ""
   };
 
   handleInputChange = event => {
@@ -16,19 +18,26 @@ class Login extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.email === "admin") {
-      window.location = "/admin";
-    } else if (this.state.email === "manager") {
-      window.location = "/main";
+    // Check required fields
+    if(!this.state.email || !this.state.password ) {
+      this.setState({error: "Please fill out all fields"})
     }
-    // axios
-    //     .get('login/auth', {
-    //         email: this.state.email,
-    //         password: this.state.password
-    //     })
-    //     .then(response =>{
-    //         console.log(response)
-    //     })
+    // if (this.state.email === "admin") {
+    //   window.location = "/admin";
+    // } else if (this.state.email === "manager") {
+    //   window.location = "/main";
+    // }
+    API.checkLogin(
+      {
+      user: this.state.email,
+      password: this.state.password
+      },
+      this.state.email
+    ).then((res) => {
+      console.log(res)
+    }).catch(e => {
+      console.log(e.response.data)
+    })
   };
 
   render() {
@@ -38,6 +47,7 @@ class Login extends Component {
           <img src="./images/logo.svg" alt="Logo" className="logo" /> Team
           <span className="companyName">Coach</span>
         </h1>
+        <span className="loginError">{this.state.error}</span>
         <form>
           <p className="loginFieldTitle">User Name:</p>
           <input

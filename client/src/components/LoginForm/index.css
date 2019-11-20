@@ -50,3 +50,7 @@
     background-color: #6301E4;
     border-color: #5202bb;
 }
+
+.loginError {
+    color: red;
+}
