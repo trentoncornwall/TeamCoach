@@ -9,6 +9,7 @@
   transform: translate(-50%, -50%);
   opacity: 0.85;
   border-radius: 30px;
+  overflow-x: hidden;
 }
 
 .MainPanelInfo {
@@ -19,7 +20,7 @@
   /* height: 100%; */
   grid-template-rows: 35% 65%s;
   grid-template-columns: auto auto;
-  grid-template-areas: 
-  "MainNav MainNav"
-  "TeamList MainTeamUsers";
+  grid-template-areas:
+    "MainNav MainNav"
+    "TeamList MainTeamUsers";
 }

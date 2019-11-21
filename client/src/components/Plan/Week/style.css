@@ -1,5 +1,5 @@
 .week {
-  width: 100%;
+  /* width: 100%; */
   height: auto;
   padding-bottom: 10px;
   border: 2px solid #a055f3;
@@ -18,7 +18,7 @@
   justify-content: flex-start;
   align-content: center;
   height: 27px;
-  width: 100%;
+  /* width: 100%; */
   background-color: #6301e4;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
