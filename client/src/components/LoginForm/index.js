@@ -1,13 +1,29 @@
 import React, { Component } from "react";
-import API from "../../utils/API"
+import API from "../../utils/API";
 import "./index.css";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { loginUser } from "../../actions/authActions";
+import classnames from "classnames";
 
 class Login extends Component {
   state = {
     email: "",
     password: "",
-    error: ""
+    error: {}
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/teams");
+    }
+
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
+  }
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -19,25 +35,33 @@ class Login extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     // Check required fields
-    if(!this.state.email || !this.state.password ) {
-      this.setState({error: "Please fill out all fields"})
-    }
+    // if (!this.state.email || !this.state.password) {
+    //   this.setState({ error: "Please fill out all fields" });
+    // }
     // if (this.state.email === "admin") {
     //   window.location = "/admin";
     // } else if (this.state.email === "manager") {
     //   window.location = "/main";
     // }
-    API.checkLogin(
-      {
-      user: this.state.email,
+    // API.checkLogin(
+    //   {
+    //     user: this.state.email,
+    //     password: this.state.password
+    //   },
+    //   this.state.email
+    // )
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(e => {
+    //     console.log(e.response.data);
+    //   });
+    const userData = {
+      email: this.state.email,
       password: this.state.password
-      },
-      this.state.email
-    ).then((res) => {
-      console.log(res)
-    }).catch(e => {
-      console.log(e.response.data)
-    })
+    };
+
+    this.props.loginUser(userData);
   };
 
   render() {
@@ -77,4 +101,15 @@ class Login extends Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default connect(mapStateToProps, { loginUser })(Login);
