@@ -34,10 +34,10 @@ class Login extends Component {
       },
       this.state.email
     ).then((res) => {
-      const accessLevel = res.data
-      switch (accessLevel.type) {
+      const userInfo = res.data
+      switch (userInfo.type) {
         case 0:
-          window.location = "/plan/" + accessLevel.id
+          window.location = "/plan/" + userInfo.id
           break;
         case 1:
           window.location = "/main"
@@ -49,6 +49,7 @@ class Login extends Component {
           window.location = "/admin"
           break;
         default:
+          window.location = "/"
           break;
       }
     }).catch(e => {
