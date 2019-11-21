@@ -8,13 +8,21 @@ import MainTeamUsers from "../components/MainTeamUsers";
 class Teams extends Component {
   state = {
     data: [],
+    tempPlanId: [],
+    subject: "",
     currentUser: "",
     currentUserPlans: [],
     teamUsers: []
   };
 
   onTeamClick(users) {
-    this.setState({ teamUsers: users });
+    this.setState({
+      teamUsers: users,
+      subject: "",
+      currentUser: "",
+      tempPlanId: [],
+      currentUserPlans: []
+    });
   }
 
   placeholderdosomethingwithplans = () => {
@@ -23,47 +31,49 @@ class Teams extends Component {
     console.log(this.state);
   };
 
-  checkPlans() {
-    if (this.state.currentUserPlans.length === 0) {
+  createPlan = event => {
+    event.preventDefault();
+    let currentUser = this.state.currentUser;
+    let newPlanSubject = this.state.subject;
+    this.setState({ subject: "" }, () => {
       API.postPlan(
         {
-          focusArea: {
-            uBehavior: "placeholder",
-            dBehavior: "dplaceholder"
-          }
+          subject: newPlanSubject
         },
-        this.state.currentUser
-      ) //Post User to DB and Clear States
-        .then(data => {
-          this.setState(
-            {
-              currentUser: data.data._id,
-              currentUserPlans: data.data.plans
-            },
-            () => this.placeholderdosomethingwithplans() //CHANGE TO FUNCITON TO CALL
-          );
+        currentUser
+      )
+        .then(success => {
+          let newPlans = success.data.plans;
+          //update with new user Plans
+          this.onUserClick(newPlans, currentUser);
         })
         .catch(err => console.log(err));
-    } else {
-      this.placeholderdosomethingwithplans(); //CHANGE TO FUNCTION TO CALL
-    }
+    });
+  };
+
+  onUserClick(plans, userId) {
+    let userPlans = [];
+    this.setState({ currentUser: userId, tempPlanId: plans }, () =>
+      plans.forEach(projectId =>
+        API.getPlan(projectId).then(result => {
+          userPlans.push(result.data[0]);
+          if (userPlans.length === plans.length) {
+            // displays all of the user's plans now
+            this.displayPlans(userPlans);
+          }
+        })
+      )
+    );
   }
 
-  onUserClick(plans) {
-    // this.setState({ currentUser: userId, currentUserPlans: plans }, () =>
-    //   // this.checkPlans()
-    //   console.log(plans)
-    // );
-    let userPlans = [];
-    plans.forEach(projectId =>
-      API.getPlan(projectId).then(result => {
-        userPlans.push(result.data[0]);
-        if (userPlans.length === plans.length) {
-          // displays all of the user's plans now
-          this.displayPlans(userPlans);
-        }
-      })
-    );
+  setArchived(planId, archive) {
+    let newArchiveStatus;
+    archive ? (newArchiveStatus = false) : (newArchiveStatus = true);
+    console.log(archive, newArchiveStatus, planId);
+    API.updatePlan({ archived: newArchiveStatus }, planId).then(sucess => {
+      //update plans with new valued buttons
+      this.onUserClick(this.state.tempPlanId, this.state.currentUser);
+    });
   }
 
   displayPlans(plans) {
@@ -81,9 +91,18 @@ class Teams extends Component {
     });
   }
 
+  handleInputChange = event => {
+    const value = event.target.value;
+    const name = event.target.name;
+    this.setState({
+      [name]: value
+    });
+  };
+
   componentDidMount() {
     this.getAllTeams();
   }
+
   render() {
     return (
       <MainPanel>
@@ -99,22 +118,48 @@ class Teams extends Component {
           ))}
         </TeamList>
         <MainTeamUsers>
-          {this.state.currentUserPlans.length === 0
-            ? this.state.teamUsers.map(user => (
-                <li
-                  key={user._id}
-                  onClick={() => {
-                    this.onUserClick(user.plans, user._id);
-                  }}
+          {this.state.currentUser.length === 0 ? (
+            this.state.teamUsers.map(user => (
+              <li
+                key={user._id}
+                onClick={() => {
+                  this.onUserClick(user.plans, user._id);
+                }}
+              >
+                {user.fName}
+              </li>
+            ))
+          ) : (
+            <ul>
+              <form className="planForm">
+                <input
+                  className="NewPlanSubject"
+                  name="subject"
+                  value={this.state.subject}
+                  onChange={this.handleInputChange}
+                ></input>
+                <button
+                  className="NewPlanButton"
+                  type="submit"
+                  value="Submit"
+                  onClick={this.createPlan}
                 >
-                  {user.fName}
-                </li>
-              ))
-            : this.state.currentUserPlans.map(plan => (
+                  Create New Plan
+                </button>
+              </form>
+              {this.state.currentUserPlans.map(plan => (
                 <li key={plan._id}>
-                  <a href={"/plan/" + plan._id}>{plan._id}</a>
+                  <a href={"/plan/" + plan._id}>{plan.subject}</a>
+                  <button
+                    key={plan._id}
+                    onClick={() => this.setArchived(plan._id, plan.archived)}
+                  >
+                    {plan.archived ? "Archived" : "Unarchive"}
+                  </button>
                 </li>
               ))}
+            </ul>
+          )}
         </MainTeamUsers>
       </MainPanel>
     );
