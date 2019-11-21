@@ -111,6 +111,7 @@ module.exports = {
       .then(planData => res.json(planData))
       .catch(err => res.status(422).json(err));
   },
+
   //! LOGIN ///////////////////////////////////////////////
   checkLogin: (req, res) => {
     db.User.findOne({ email: req.body.data.user }).then(user => {
