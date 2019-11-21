@@ -34,7 +34,23 @@ class Login extends Component {
       },
       this.state.email
     ).then((res) => {
-      console.log(res)
+      const accessLevel = res.data
+      switch (accessLevel.type) {
+        case 0:
+          window.location = "/plan/" + accessLevel.id
+          break;
+        case 1:
+          window.location = "/main"
+          break;
+        case 2:
+          window.location = "/main"
+          break;
+        case 3:
+          window.location = "/admin"
+          break;
+        default:
+          break;
+      }
     }).catch(e => {
       this.setState({error: e.response.data[Object.keys(e.response.data)[0]] })
     })

@@ -124,25 +124,25 @@ module.exports = {
           // Create JWT Payload
           const payload = {
             id: user._id,
-            name: user.email
+            name: user.email,
+            type: user.userType
           };
-
+          res.json(payload)
           // Sign token
-          jwt.sign(
-            payload,
-            keys.secretOrKey,
-            {
-              expiresIn: 2592000 // 1 month in seconds - 1 year = 31556926
-            },
-            (err, token) => {
-              res.json({
-                success: true,
-                token: "Bearer " + token
-              });
-            }
-          );
+          // jwt.sign(
+          //   payload,
+          //   keys.secretOrKey,
+          //   {
+          //     expiresIn: 2592000 // 1 month in seconds - 1 year = 31556926
+          //   },
+          //   (err, token) => {
+          //     res.json({
+          //       success: true,
+          //       token: "Bearer " + token
+          //     });
+          //   }
+          // );
 
-          return res
         } else {
           return res
             .status(400)
