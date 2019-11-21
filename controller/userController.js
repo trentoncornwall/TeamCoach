@@ -141,6 +141,8 @@ module.exports = {
               });
             }
           );
+
+          return res
         } else {
           return res
             .status(400)

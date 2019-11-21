@@ -36,7 +36,7 @@ class Login extends Component {
     ).then((res) => {
       console.log(res)
     }).catch(e => {
-      console.log(e.response.data)
+      this.setState({error: e.response.data[Object.keys(e.response.data)[0]] })
     })
   };
 
