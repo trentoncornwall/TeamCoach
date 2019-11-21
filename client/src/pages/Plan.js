@@ -10,8 +10,8 @@ class Plans extends Component {
   state = {
     User: {},
     Nav: { name: "", startDate: "", endDate: "" },
-    FocusArea: { name: "Focus Area", data: "" },
-    RootCause: { name: "Root Cause", data: "" },
+    FocusArea: "",
+    RootCause: "",
     //! Ever new weeks object that is added will create a new week on the plan
     // When we build out plans API calls, we'll have to do a count on the current of weeks so we can set week number
     Weeks: []
@@ -23,14 +23,23 @@ class Plans extends Component {
     API.getPlan(this.props.match.params.id)
       .then(res => {
         console.log(res.data[0]);
-        let newWeeks = res.data[0].Weeks;
+        // let newWeeks = res.data[0].Weeks;
         API.getUser(res.data[0].ownerID)
           .then(data => {
-            console.log(data.data[0]);
+            var newFocusArea = "";
+            var newRootCause = "";
+            if (res.data[0].focusArea) {
+              newFocusArea = res.data[0].focusArea;
+            }
+            if (res.data[0].rootCause) {
+              newRootCause = res.data[0].rootCause;
+            }
             this.setState({
               User: data.data[0],
               Nav: { name: data.data[0].fName + " " + data.data[0].lName },
-              Weeks: newWeeks
+              FocusArea: newFocusArea,
+              RootCause: newRootCause,
+              Weeks: res.data[0].Weeks
             });
           })
           .catch(err => console.log(err));
@@ -43,8 +52,8 @@ class Plans extends Component {
     console.log("New week added");
     API.updatePlan(
       {
-        // FocusArea: this.FocusArea.data,
-        // RootCause: this.RootCause.data,
+        focusArea: this.state.FocusArea,
+        rootCause: this.state.RootCause,
         Weeks: this.state.Weeks
       },
       this.props.match.params.id
@@ -66,6 +75,8 @@ class Plans extends Component {
   handleInputChange = event => {
     const name = event.target.name;
     const value = event.target.value;
+
+    this.setState({ [name]: value });
     // useless until updated
   };
 
@@ -89,8 +100,18 @@ class Plans extends Component {
     return (
       <PlanPanel>
         <PlanNav navState={this.state.Nav} />
-        <SimpleContainer focusArea={this.state.FocusArea} />
-        <SimpleContainer focusArea={this.state.RootCause} />
+        <SimpleContainer
+          areaName={"Focus Area"}
+          name={"FocusArea"}
+          state={this.state.FocusArea}
+          onChange={this.handleInputChange}
+        />
+        <SimpleContainer
+          areaName={"Root Cause"}
+          name={"RootCause"}
+          state={this.state.RootCause}
+          onChange={this.handleInputChange}
+        />
         {this.state.Weeks.map(week => (
           <Week
             key={week.weekNumber}

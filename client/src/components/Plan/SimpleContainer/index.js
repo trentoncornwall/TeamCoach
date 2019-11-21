@@ -4,7 +4,14 @@ import "./style.css";
 const SimpleContainer = props => {
   return (
     <div className="areaContainer">
-      <span className="planContainerName">{props.focusArea.name}: </span>
+      <span className="planContainerName">
+        {props.areaName}:
+        <input
+          onChange={props.onChange}
+          value={props.state}
+          name={props.name}
+        />
+      </span>
     </div>
   );
 };

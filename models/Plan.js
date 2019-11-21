@@ -9,11 +9,7 @@ const PlanSchema = new Schema({
     ref: "User",
     required: true
   },
-  focusArea: {
-    uBehavior: String,
-    dBehavior: String,
-    value: String
-  },
+  focusArea: String,
   rootCause: String,
   Weeks: [
     // {
