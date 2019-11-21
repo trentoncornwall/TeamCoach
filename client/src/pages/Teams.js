@@ -38,7 +38,8 @@ class Teams extends Component {
     this.setState({ subject: "" }, () => {
       API.postPlan(
         {
-          subject: newPlanSubject
+          subject: newPlanSubject,
+          ownerID: currentUser
         },
         currentUser
       )

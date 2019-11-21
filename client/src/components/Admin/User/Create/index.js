@@ -51,7 +51,7 @@ function UserCreate(props) {
           name="create_teamID"
           onChange={props.HIC}
         >
-          <option value="" selected>
+          <option value="" defaultValue>
             Select Team
           </option>
           {props.state.teamData.map(team => (
