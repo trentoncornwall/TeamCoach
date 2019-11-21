@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const PlanSchema = new Schema({
   archived: { type: Boolean, default: false },
+  subject: String,
   // startDate: { type: Date, required: true },
   // endDate: { type: Date, required: true },
   focusArea: {
