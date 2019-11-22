@@ -6,6 +6,7 @@
   border-radius: 9px;
   margin-bottom: 14px;
   position: relative;
+  background-color: white;
 }
 
 .week span {
@@ -17,7 +18,7 @@
   margin-bottom: 7px;
   justify-content: flex-start;
   align-content: center;
-  height: 27px;
+  height: 40px;
   /* width: 100%; */
   background-color: #6301e4;
   border-top-left-radius: 7px;
@@ -28,6 +29,36 @@
   color: white;
   padding-left: 10px;
   font-size: 19px;
+}
+
+.weekSubText {
+  /* font-weight: bolder; */
+  font-size: 18px;
+}
+
+.week-text-area {
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
+  height: 80px;
+  overflow: scroll;
+  /* border: 1px solid rgba(0, 0, 0, 0.329); */
+  border: none;
+  border-top: 3px solid rgba(61, 61, 61, 0.123);
+  border-radius: 6px;
+  padding: 8px;
+  padding-left: 15px;
+  /* margin-bottom: 5px; */
+  transition: 0.5s;
+  font-size: 16px;
+  letter-spacing: -1px;
+}
+
+.week-text-area:hover {
+  background-color: rgb(245, 245, 245);
+  opacity: 1;
+  border-color: #a055f3;
+  transition: 0.5s;
 }
 
 .saveBTN {
