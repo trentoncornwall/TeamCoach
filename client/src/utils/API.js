@@ -31,7 +31,10 @@ export default {
   updatePlan: function(data, id) {
     return axios.put("/api/plans/" + id, { data });
   },
-  checkLogin: function(data, user) {
-    return axios.post("/api/login/" + user, { data });
+  checkLogin: function(data) {
+    return axios.post("/api/login/" , data );
+  },
+  checkCurrent: function(){
+    return axios.get("/api/login/current");
   }
 };

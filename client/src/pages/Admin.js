@@ -9,13 +9,13 @@ const bcrypt = require("bcryptjs");
 class Admin extends Component {
   // Create_User States + Store All Users for Render
   state = {
+    status:false,
     create_firstName: "",
     create_lastName: "",
     create_userType: 0,
     create_email: "",
     create_password: "",
     create_teamID: "",
-
     create_teamName: "",
     // ALL USERS
     userData: [],
@@ -134,11 +134,23 @@ hashPassword = (password) => {
 
   // Init Users
   componentDidMount() {
-    this.loadUsers();
-    this.loadTeams();
+    API.checkCurrent().then(data=>{
+      if(data.data){
+        console.log("data passed")
+        console.log(data.data);
+        this.setState({status: true}, ()=>{
+          this.loadTeams();
+          this.loadUsers();
+        })
+      
+      } else {
+        window.location = '/'
+      }
+    })
   }
 
   render() {
+    if(this.state.status){
     return (
       <AdminPanel>
         <h1>Admin</h1>
@@ -168,6 +180,9 @@ hashPassword = (password) => {
         />
       </AdminPanel>
     );
+        }else{
+          return(<div>Failed To Login</div>)
+        }
   }
 }
 

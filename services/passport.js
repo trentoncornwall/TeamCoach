@@ -1,23 +1,57 @@
-const JwtStrategy = require("passport-jwt").Strategy;
-const ExtractJwt = require("passport-jwt").ExtractJwt;
-const mongoose = require("mongoose");
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const passportJWT = require('passport-jwt');
+const JwtStrategy = passportJWT.Strategy;
+const ExtractJwt = passportJWT.ExtractJwt;
 const keys = require("../config/keys");
+const db = require("../models");
+const bcrypt = require('bcryptjs');
 
-const opts = {};
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = keys.secretOrKey;
+passport.serializeUser((user, done) => {
+  done(null, user.id)
+})
+passport.deserializeUser((id, done) => {
+  db.User.findById(id).then(user => {
+    done(null, user);
+  })
+})
 
-module.exports = passport => {
-    passport.use(
-      new JwtStrategy(opts, (jwt_payload, done) => {
-        User.findById(jwt_payload.id)
-          .then(user => {
-            if (user) {
-              return done(null, user);
-            }
-            return done(null, false);
-          })
-          .catch(err => console.log(err));
+passport.use(new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password'
+},
+  function (email, password, cb) {
+    return db.User.findOne({ email})
+      .then(user => {
+        
+        if (!user) {
+          return cb(null, false, {message: 'Incorrect email or password.'});
+        }
+        bcrypt.compare(password, user.password).then(isMatch => {
+          if (isMatch) {
+    
+            return cb(null, user, {message: 'Logged In Sucessfully'});
+          } else {
+            return res
+              .status(400)
+              .json({ passwordincorrect: "Password incorrect" });
+          }
+        });
       })
-    );
-  };
+  }
+));
+
+passport.use(new JwtStrategy({
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey : keys.secretOrKey
+  },
+  function(jwtPayload, cb) {
+    return db.User.findOne({ id: jwtPayload.id })
+      .then(user => {
+        return cb(null, user);
+      })
+      .catch(err => {
+        return cb(err);
+      });
+  }
+));
