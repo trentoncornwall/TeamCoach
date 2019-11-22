@@ -25,12 +25,6 @@ class Teams extends Component {
     });
   }
 
-  placeholderdosomethingwithplans = () => {
-    console.log(`STATE UPDATED WITH PLANS AND STUFF NOW DO SOMETHING`);
-    console.log(`CURRENT STATE:`);
-    console.log(this.state);
-  };
-
   createPlan = event => {
     event.preventDefault();
     let currentUser = this.state.currentUser;
@@ -54,17 +48,20 @@ class Teams extends Component {
 
   onUserClick(plans, userId) {
     let userPlans = [];
-    this.setState({ currentUser: userId, tempPlanId: plans }, () =>
-      plans.forEach(projectId =>
-        API.getPlan(projectId).then(result => {
-          userPlans.push(result.data[0]);
-          if (userPlans.length === plans.length) {
-            // displays all of the user's plans now
-            this.displayPlans(userPlans);
-          }
-        })
-      )
-    );
+    API.getUser(userId).then(result => {
+      let plans = result.data[0].plans;
+      this.setState({ currentUser: userId, tempPlanId: plans }, () =>
+        plans.forEach(projectId =>
+          API.getPlan(projectId).then(result => {
+            userPlans.push(result.data[0]);
+            if (userPlans.length === plans.length) {
+              // displays all of the user's plans now
+              this.displayPlans(userPlans);
+            }
+          })
+        )
+      );
+    });
   }
 
   setArchived(planId, archive) {
@@ -83,12 +80,13 @@ class Teams extends Component {
 
   getAllTeams() {
     API.getTeamUsers().then(result => {
+      console.log(result);
       var dataArr = [];
       result.data.forEach(team => {
         dataArr.push(team);
       });
+      //data is all teams and user info which includes user plans object ids
       this.setState({ data: dataArr });
-      console.log(this.state);
     });
   }
 
