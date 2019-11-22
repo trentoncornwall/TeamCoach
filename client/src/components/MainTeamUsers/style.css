@@ -7,17 +7,74 @@
     /* padding: 5px;
     margin: 10px; */
     cursor: pointer;
-    
+    /* border-left:1px solid gray; */
+    height:100%;
+    padding-left: 0;
     
 }
 
 .team-member-name {
     font-size: 20px;
     width: 100%;
-    color:  #A055F3;
+    color: #6301E4;
     text-decoration: none;
     list-style-type: none;
-    padding: 10px;
-   
+    /* padding: 10px; */
+    margin-top:0;
+    padding-left: 0px;
 }
 
+.team-member-name li{
+    padding-left:30px;
+    
+}
+
+.currentTeamName{
+    font-weight: bold;
+    margin: 0 0 5px 0;
+    /* border-bottom: 1px solid gray; */
+    padding-left: 30px;
+}
+.NewPlanButton {
+   position: absolute;
+   right: 12%;
+   top: 28%;
+   background: #A055F3;
+   color: white;
+   border-radius: 5px;
+   padding: 5px;
+   width:  130px;
+   font-size: 14px;
+
+}
+
+.NewPlanSubject {
+    position: absolute;
+   right: 23%;
+   top: 28%;
+   width: 150px;
+   height: 20px;
+
+}
+
+.archive {
+    border-radius: 5px;
+    padding: 3px;
+    width:  110px;
+    font-size: 12px;
+    
+}
+
+.true {
+    background: tomato;
+}
+.planLink {
+    padding-left: 25px;
+    text-decoration: none;
+}
+.planLink:link, .planLink:visted {
+    color: #A055F3;
+}
+/* .planLink:hover {
+    font-size: 
+} */

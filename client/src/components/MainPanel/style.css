@@ -24,3 +24,10 @@
     "MainNav MainNav"
     "TeamList MainTeamUsers";
 }
+
+.currentUserName{
+  text-decoration: underline;
+}
+.planItem {
+  list-style-type: none;
+}
