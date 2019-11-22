@@ -11,6 +11,8 @@ class Teams extends Component {
     tempPlanId: [],
     subject: "",
     currentUser: "",
+    currentUserFirst: "",
+    currentUserLast:"",
     currentUserPlans: [],
     teamUsers: []
   };
@@ -50,7 +52,7 @@ class Teams extends Component {
     let userPlans = [];
     API.getUser(userId).then(result => {
       let plans = result.data[0].plans;
-      this.setState({ currentUser: userId, tempPlanId: plans }, () =>
+      this.setState({ currentUser: userId, tempPlanId: plans, currentUserFirst: result.data[0].fName, currentUserLast: result.data[0].lName }, () =>
         plans.forEach(projectId =>
           API.getPlan(projectId).then(result => {
             userPlans.push(result.data[0]);
@@ -130,6 +132,7 @@ class Teams extends Component {
             ))
           ) : (
             <ul>
+              <h3>{this.state.currentUserFirst} {this.state.currentUserLast}</h3>
               <form className="planForm">
                 <input
                   className="NewPlanSubject"
