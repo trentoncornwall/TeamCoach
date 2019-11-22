@@ -32,9 +32,12 @@ export default {
     return axios.put("/api/plans/" + id, { data });
   },
   checkLogin: function(data) {
-    return axios.post("/api/login/" , data );
+    return axios.post("/api/login/", data);
   },
-  checkCurrent: function(){
+  checkCurrent: function() {
     return axios.get("/api/login/current");
+  },
+  logOut: function() {
+    return axios.get("api/login/logout");
   }
 };

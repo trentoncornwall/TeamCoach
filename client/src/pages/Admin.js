@@ -4,12 +4,13 @@ import AdminPanel from "../components/Admin/AdminPanel";
 import UserComp from "../components/Admin/User";
 import UserCreate from "../components/Admin/User/Create";
 import TeamCreate from "../components/Admin/Team/Create";
+import LogOut from "../components/LogOut";
 const bcrypt = require("bcryptjs");
 
 class Admin extends Component {
   // Create_User States + Store All Users for Render
   state = {
-    status:false,
+    status: false,
     create_firstName: "",
     create_lastName: "",
     create_userType: 0,
@@ -61,7 +62,6 @@ class Admin extends Component {
     API.createTeam({
       teamName: this.state.create_teamName
     }).then(() => {
-      // console.log("team created");
       this.refresh();
     });
   };
@@ -69,15 +69,10 @@ class Admin extends Component {
   // Handle Submit for Create_User
   handleSubmit = event => {
     event.preventDefault(); //Prevent Refresh
-    this.hashPassword(this.state.create_password)
-    
-    // API.insertUser({
-
-    // create_teaminsert: "",
-    // })
+    this.hashPassword(this.state.create_password);
   };
 
-  postUser=()=>{
+  postUser = () => {
     API.postUser(
       {
         fName: this.state.create_firstName,
@@ -92,18 +87,18 @@ class Admin extends Component {
         // Reloa
         this.refresh();
       });
-  }
+  };
 
-hashPassword = (password) => {
-  const that = this
-  bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(password, salt, function(err, hash) {
-      that.setState({create_password: hash},()=>{
-        that.postUser();
+  hashPassword = password => {
+    const that = this;
+    bcrypt.genSalt(10, function(err, salt) {
+      bcrypt.hash(password, salt, function(err, hash) {
+        that.setState({ create_password: hash }, () => {
+          that.postUser();
+        });
       });
-    })
-  })
-}
+    });
+  };
 
   // Load User Data
   loadUsers = () => {
@@ -134,55 +129,59 @@ hashPassword = (password) => {
 
   // Init Users
   componentDidMount() {
-    API.checkCurrent().then(data=>{
-      if(data.data){
-        console.log("data passed")
-        console.log(data.data);
-        this.setState({status: true}, ()=>{
+    API.checkCurrent().then(data => {
+      if (data.data.userType === 3) {
+        this.setState({ status: true }, () => {
           this.loadTeams();
           this.loadUsers();
-        })
-      
+        });
       } else {
-        window.location = '/'
+        window.location = "/";
       }
-    })
+    });
   }
 
-  render() {
-    if(this.state.status){
-    return (
-      <AdminPanel>
-        <h1>Admin</h1>
-        {this.state.userData.map(user => (
-          <UserComp
-            id={user._id}
-            key={user._id}
-            email={user.email}
-            fullName={user.fName + " " + user.lName}
-            // Functions Pass
-            handleInputChange={this.handleInputChange}
-            delete={this.deleteButtonClick}
-          />
-        ))}
+  logout = () => {
+    API.logOut().then(response => {
+      window.location = "/";
+    });
+  };
 
-        <UserCreate
-          // Functions Pass *different prop names?*
-          HIC={this.handleInputChange}
-          HS={this.handleSubmit}
-          // Pass State so that values are synced to state at all times
-          state={this.state}
-        />
-        <TeamCreate
-          HIC={this.handleInputChange}
-          HTS={this.handleTeamSubmit}
-          state={this.state}
-        />
-      </AdminPanel>
-    );
-        }else{
-          return(<div>Failed To Login</div>)
-        }
+  render() {
+    if (this.state.status) {
+      return (
+        <AdminPanel>
+          <div className="AdminNav">
+            <h1>Admin</h1> <LogOut onClick={() => this.logout()} />
+          </div>
+          {this.state.userData.map(user => (
+            <UserComp
+              id={user._id}
+              key={user._id}
+              email={user.email}
+              fullName={user.fName + " " + user.lName}
+              // Functions Pass
+              handleInputChange={this.handleInputChange}
+              delete={this.deleteButtonClick}
+            />
+          ))}
+          <UserCreate
+            // Functions Pass *different prop names?*
+            HIC={this.handleInputChange}
+            HS={this.handleSubmit}
+            // Pass State so that values are synced to state at all times
+            state={this.state}
+          />
+          <TeamCreate
+            HIC={this.handleInputChange}
+            HTS={this.handleTeamSubmit}
+            state={this.state}
+          />
+        </AdminPanel>
+      );
+    } else {
+      return <div>Failed To Login</div>;
+    }
   }
 }
 
