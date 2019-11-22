@@ -7,7 +7,7 @@ const SimpleContainer = props => {
       <span className="planContainerName">
         {props.areaName}:<br />
         <textarea
-          class="plan-text-area-container"
+          className="plan-text-area-container"
           onChange={props.onChange}
           value={props.state}
           name={props.name}

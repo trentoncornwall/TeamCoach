@@ -29,15 +29,17 @@ class Login extends Component {
     // }
     API.checkLogin(
       {
-      user: this.state.email,
+      email: this.state.email,
       password: this.state.password
       },
       this.state.email
     ).then((res) => {
+      console.log(res)
       const userInfo = res.data
-      switch (userInfo.type) {
+
+      switch (userInfo.userType) {
         case 0:
-          window.location = "/plan/" + userInfo.id
+          window.location = "/teams"
           break;
         case 1:
           window.location = "/main"
@@ -49,7 +51,8 @@ class Login extends Component {
           window.location = "/admin"
           break;
         default:
-          window.location = "/"
+          // window.location = "/"
+          console.log('logged in')
           break;
       }
     }).catch(e => {
