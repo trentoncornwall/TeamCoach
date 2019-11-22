@@ -127,7 +127,9 @@ class Teams extends Component {
                   this.onUserClick(user.plans, user._id);
                 }}
               >
-                {user.fName}
+                <br></br>
+                {user.fName} {user.lName}
+                
               </li>
             ))
           ) : (
