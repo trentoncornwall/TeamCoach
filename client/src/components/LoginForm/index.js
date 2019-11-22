@@ -34,9 +34,26 @@ class Login extends Component {
       },
       this.state.email
     ).then((res) => {
-      console.log(res)
+      const userInfo = res.data
+      switch (userInfo.type) {
+        case 0:
+          window.location = "/plan/" + userInfo.id
+          break;
+        case 1:
+          window.location = "/main"
+          break;
+        case 2:
+          window.location = "/main"
+          break;
+        case 3:
+          window.location = "/admin"
+          break;
+        default:
+          window.location = "/"
+          break;
+      }
     }).catch(e => {
-      console.log(e.response.data)
+      this.setState({error: e.response.data[Object.keys(e.response.data)[0]] })
     })
   };
 
