@@ -5,8 +5,9 @@ const SimpleContainer = props => {
   return (
     <div className="areaContainer">
       <span className="planContainerName">
-        {props.areaName}:
-        <input
+        {props.areaName}:<br />
+        <textarea
+          class="plan-text-area-container"
           onChange={props.onChange}
           value={props.state}
           name={props.name}
