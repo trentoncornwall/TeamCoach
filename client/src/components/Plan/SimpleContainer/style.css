@@ -28,6 +28,11 @@
   padding-left: 15px;
   /* margin-bottom: 5px; */
   transition: 0.5s;
+  overflow-x: hidden;
+}
+
+.plan-text-area-container:hover {
+  border-color: rgb(160, 160, 160);
 }
 
 .plan-text-area-container:focus {
