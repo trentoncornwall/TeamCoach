@@ -2,6 +2,7 @@ const db = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
+const passport = require("passport");
 
 module.exports = {
   //! USERS ///////////////////////////////////////////
@@ -114,41 +115,18 @@ module.exports = {
 
   //! LOGIN ///////////////////////////////////////////////
   checkLogin: (req, res) => {
-    db.User.findOne({ email: req.body.data.user }).then(user => {
-      if (!user) {
-        return res.status(404).json({ emailnotfound: "Email not found" });
-      }
-      bcrypt.compare(req.body.data.password, user.password).then(isMatch => {
-        if (isMatch) {
-          //User Matched
-          // Create JWT Payload
-          const payload = {
-            id: user._id,
-            name: user.email,
-            type: user.userType
-          };
-          res.json(payload)
-          // Sign token
-          // jwt.sign(
-          //   payload,
-          //   keys.secretOrKey,
-          //   {
-          //     expiresIn: 2592000 // 1 month in seconds - 1 year = 31556926
-          //   },
-          //   (err, token) => {
-          //     res.json({
-          //       success: true,
-          //       token: "Bearer " + token
-          //     });
-          //   }
-          // );
+    console.log(req.user)
+    res.json(req.user)
+  },
 
-        } else {
-          return res
-            .status(400)
-            .json({ passwordincorrect: "Password incorrect" });
-        }
-      });
-    });
+  checkUser: (req, res) => {
+    res.json(req.user)
+  },
+
+  logOut: (req, res) => {
+    console.log('logout')
+    console.log(req.body)
+    req.logout();
+    res.redirect('/');
   }
 };
