@@ -10,8 +10,10 @@ const index = props => {
       <div className="weekDataContainer">
         <div className="weekPlanning">
           <span className="weekSubText">
-            Planning:
-            <input
+            Planning
+            <br />
+            <textarea
+              class="week-text-area"
               name="planning"
               week={props.week.weekNumber}
               value={props.week.planning}
@@ -21,8 +23,10 @@ const index = props => {
         </div>
         <div className="weekCoaching">
           <span className="weekSubText">
-            Coach Commitment:
-            <input
+            Coach Commitment
+            <br />
+            <textarea
+              class="week-text-area"
               name="coach"
               week={props.week.weekNumber}
               value={props.week.coach}
@@ -32,8 +36,10 @@ const index = props => {
         </div>
         <div className="weekEmployee">
           <span className="weekSubText">
-            Employee Commitment:
-            <input
+            Employee Commitment
+            <br />
+            <textarea
+              class="week-text-area"
               name="employee"
               week={props.week.weekNumber}
               value={props.week.employee}
@@ -43,8 +49,10 @@ const index = props => {
         </div>
         <div className="weekResult">
           <span className="weekSubText">
-            Results:
-            <input
+            Results
+            <br />
+            <textarea
+              class="week-text-area"
               name="results"
               week={props.week.weekNumber}
               value={props.week.results}
