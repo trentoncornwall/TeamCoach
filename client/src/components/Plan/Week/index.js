@@ -13,7 +13,7 @@ const index = props => {
             Planning
             <br />
             <textarea
-              class="week-text-area"
+              className="week-text-area"
               name="planning"
               week={props.week.weekNumber}
               value={props.week.planning}
@@ -26,7 +26,7 @@ const index = props => {
             Coach Commitment
             <br />
             <textarea
-              class="week-text-area"
+              className="week-text-area"
               name="coach"
               week={props.week.weekNumber}
               value={props.week.coach}
@@ -39,7 +39,7 @@ const index = props => {
             Employee Commitment
             <br />
             <textarea
-              class="week-text-area"
+              className="week-text-area"
               name="employee"
               week={props.week.weekNumber}
               value={props.week.employee}
@@ -52,7 +52,7 @@ const index = props => {
             Results
             <br />
             <textarea
-              class="week-text-area"
+              className="week-text-area"
               name="results"
               week={props.week.weekNumber}
               value={props.week.results}
