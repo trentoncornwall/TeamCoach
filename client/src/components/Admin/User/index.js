@@ -6,23 +6,27 @@ import "./style.css";
 function User(props) {
   return (
     <div className="userRow">
-      <p id={props.id}>
+      <p className="userName " id={props.id}>
         {props.fullName} (Email: {props.email})
       </p>
-      <button
-        className="userButton delete"
-        id={props.id}
-        onClick={props.delete}
-      >
-        Delete
-      </button>
-      <Popup
-        className="popup"
-        modal
-        trigger={<button className="userButton update modal">Update</button>}
-      >
-        <UpdateUser id={props.id} />
-      </Popup>
+      <div>
+        <button
+          className="userButton delete"
+          id={props.id}
+          onClick={props.delete}
+        >
+          Delete
+        </button>
+      </div>
+      <div>
+        <Popup
+          className="popup"
+          modal
+          trigger={<button className="userButton update modal">Update</button>}
+        >
+          <UpdateUser id={props.id} />
+        </Popup>
+      </div>
     </div>
   );
 }
