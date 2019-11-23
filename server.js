@@ -33,13 +33,25 @@ app.use(passport.session());
 // Define API routes here
 app.use(routes);
 
-mongoose.connect(
+const mongoURL =
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
   process.env.MONGODB_URI ||
-    "mongodb://admin:teamcoach1@ds155616.mlab.com:55616/heroku_pdt46ltjh",
+  "mongodb://localhost/teamcoach";
+
+mongoose.connect(
+  mongoURL,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
+  },
+  (err, res) => {
+    if (err) {
+      console.log(`MONGO: failed to connect to ${mongoURL}\nERR: ${err}`);
+    } else {
+      console.log(`MONGO: successful connection to ${mongoURL}`);
+    }
   }
 );
 
