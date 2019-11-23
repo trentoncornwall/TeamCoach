@@ -37,7 +37,7 @@ const mongoURL =
   process.env.MONGOLAB_URI ||
   process.env.MONGOHQ_URL ||
   process.env.MONGODB_URI ||
-  "mongodb://localhost/teamcoach";
+  "mongodb://admin:teamcoach1@ds155616.mlab.com:55616/heroku_pdt46ltj";
 
 mongoose.connect(
   mongoURL,
