@@ -13,18 +13,21 @@ class Teams extends Component {
     subject: "",
     currentUser: "",
     currentUserFirst: "",
-    currentUserLast: "",
+
+    currentUserLast:"",
+    currentTeam:"",
     currentUserPlans: [],
     teamUsers: []
   };
 
-  onTeamClick(users) {
+  onTeamClick(teamname, users) {
     this.setState({
       teamUsers: users,
       subject: "",
       currentUser: "",
       tempPlanId: [],
-      currentUserPlans: []
+      currentUserPlans: [],
+      currentTeam: teamname
     });
   }
 
@@ -140,11 +143,12 @@ class Teams extends Component {
               teamName={team.teamName}
               key={team._id}
               id={team._id}
-              onClick={() => this.onTeamClick(team.users)}
+              onClick={() => this.onTeamClick(team.teamName, team.users)}
             />
           ))}
         </TeamList>
         <MainTeamUsers>
+        <h2 className="currentTeamName"> {this.state.currentTeam}</h2>
           {this.state.currentUser.length === 0 ? (
             this.state.teamUsers.map(user => (
               <li
@@ -153,14 +157,14 @@ class Teams extends Component {
                   this.onUserClick(user.plans, user._id);
                 }}
               >
-                {user.fName}
+                
+                {user.fName} {user.lName}
+                
               </li>
             ))
           ) : (
-            <ul>
-              <h3>
-                {this.state.currentUserFirst} {this.state.currentUserLast}
-              </h3>
+            <ul>            
+              <h3 className="currentUserName">{this.state.currentUserFirst} {this.state.currentUserLast}</h3>
               <form className="planForm">
                 <input
                   className="NewPlanSubject"
@@ -178,14 +182,15 @@ class Teams extends Component {
                 </button>
               </form>
               {this.state.currentUserPlans.map(plan => (
-                <li key={plan._id}>
-                  <a href={"/plan/" + plan._id}>{plan.subject}</a>
+                <li key={plan._id} className="planItem">
                   <button
                     key={plan._id}
+                    className="archive"
                     onClick={() => this.setArchived(plan._id, plan.archived)}
                   >
                     {plan.archived ? "Archived" : "Unarchive"}
                   </button>
+                  <a href={"/plan/" + plan._id} className="planLink">{plan.subject}</a>
                 </li>
               ))}
             </ul>
