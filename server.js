@@ -6,9 +6,8 @@ const routes = require("./routes");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
-const session = require('express-session');
+const session = require("express-session");
 const keys = require("./config/keys");
-
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -20,28 +19,29 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Bodyparser middleware
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Passport config
 require("./services/passport");
 
 // Passport Middleware
-app.use(session({ secret: keys.secretOrKey, resave: false}))
-app.use(passport.initialize())
-app.use(passport.session())
-
+app.use(session({ secret: keys.secretOrKey, resave: false }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Define API routes here
 app.use(routes);
 
-
-
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/teamcoach", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false
-});
+mongoose.connect(
+  process.env.MONGODB_URI ||
+    "mongodb://admin:teamcoach1@ds155616.mlab.com:55616/heroku_pdt46ltjh",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+  }
+);
 
 // Send every other request to the React app
 // Define any API routes before this runs
