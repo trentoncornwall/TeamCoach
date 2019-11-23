@@ -7,11 +7,13 @@ import API from "../utils/API";
 import MainTeamUsers from "../components/MainTeamUsers";
 class Teams extends Component {
   state = {
+    status: false,
     data: [],
     tempPlanId: [],
     subject: "",
     currentUser: "",
     currentUserFirst: "",
+
     currentUserLast:"",
     currentTeam:"",
     currentUserPlans: [],
@@ -54,16 +56,23 @@ class Teams extends Component {
     let userPlans = [];
     API.getUser(userId).then(result => {
       let plans = result.data[0].plans;
-      this.setState({ currentUser: userId, tempPlanId: plans, currentUserFirst: result.data[0].fName, currentUserLast: result.data[0].lName }, () =>
-        plans.forEach(projectId =>
-          API.getPlan(projectId).then(result => {
-            userPlans.push(result.data[0]);
-            if (userPlans.length === plans.length) {
-              // displays all of the user's plans now
-              this.displayPlans(userPlans);
-            }
-          })
-        )
+      this.setState(
+        {
+          currentUser: userId,
+          tempPlanId: plans,
+          currentUserFirst: result.data[0].fName,
+          currentUserLast: result.data[0].lName
+        },
+        () =>
+          plans.forEach(projectId =>
+            API.getPlan(projectId).then(result => {
+              userPlans.push(result.data[0]);
+              if (userPlans.length === plans.length) {
+                // displays all of the user's plans now
+                this.displayPlans(userPlans);
+              }
+            })
+          )
       );
     });
   }
@@ -102,14 +111,32 @@ class Teams extends Component {
     });
   };
 
+  logout = () => {
+    API.logOut().then(response => {
+      window.location = "/";
+    });
+  };
+
   componentDidMount() {
-    this.getAllTeams();
+    API.checkCurrent().then(data => {
+      if (!data.data) {
+        window.location = "/";
+      } else {
+        if (data.data.userType === 1 || 2 || 3) {
+          console.log("setting status to true");
+          this.setState({ status: true }, () => {
+            this.getAllTeams();
+          });
+        }
+      }
+    });
   }
 
   render() {
     return (
       <MainPanel>
-        <MainNav />
+        <MainNav logout={() => this.logout()} />
+
         <TeamList>
           {this.state.data.map(team => (
             <TeamName
@@ -136,8 +163,7 @@ class Teams extends Component {
               </li>
             ))
           ) : (
-            <ul>
-              
+            <ul>            
               <h3 className="currentUserName">{this.state.currentUserFirst} {this.state.currentUserLast}</h3>
               <form className="planForm">
                 <input

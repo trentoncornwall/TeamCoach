@@ -15,6 +15,15 @@
 .AdminPanelInfo {
   opacity: 1;
   color: grey;
-  padding: 20px;
+  padding: 10px;
   display: grid;
+}
+
+.AdminNav {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid grey;
+  margin-bottom: 10px;
 }
