@@ -33,15 +33,21 @@ app.use(passport.session());
 // Define API routes here
 app.use(routes);
 
-mongoose.connect(
-  process.env.MONGODB_URI ||
-    "mongodb://admin:teamcoach1@ds155616.mlab.com:55616/heroku_pdt46ltjh",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-  }
-);
+// mongoose.connect(
+//   process.env.MONGODB_URI ||
+//     "mongodb://admin:teamcoach1@ds155616.mlab.com:55616/heroku_pdt46ltjh",
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useFindAndModify: false
+//   }
+// );
+
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/teamcoach", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false
+});
 
 // Send every other request to the React app
 // Define any API routes before this runs
