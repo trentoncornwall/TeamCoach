@@ -8,6 +8,7 @@ import API from "../utils/API";
 
 class Plans extends Component {
   state = {
+    status: false,
     User: {},
     Nav: { name: "", startDate: "", endDate: "" },
     FocusArea: "",
@@ -93,35 +94,47 @@ class Plans extends Component {
   };
 
   componentDidMount() {
-    this.getData();
+    API.checkCurrent().then(data => {
+      if (data.data) {
+        this.setState({ status: true }, () => {
+          this.getData();
+        });
+      } else {
+        window.location = "/";
+      }
+    });
   }
 
   render() {
-    return (
-      <PlanPanel>
-        <PlanNav navState={this.state.Nav} />
-        <SimpleContainer
-          areaName={"Focus Area"}
-          name={"FocusArea"}
-          state={this.state.FocusArea}
-          onChange={this.handleInputChange}
-        />
-        <SimpleContainer
-          areaName={"Root Cause"}
-          name={"RootCause"}
-          state={this.state.RootCause}
-          onChange={this.handleInputChange}
-        />
-        {this.state.Weeks.map(week => (
-          <Week
-            key={week.weekNumber}
-            week={week}
-            onChange={this.handleWeekChange}
+    if (this.state.status) {
+      return (
+        <PlanPanel>
+          <PlanNav navState={this.state.Nav} />
+          <SimpleContainer
+            areaName={"Focus Area"}
+            name={"FocusArea"}
+            state={this.state.FocusArea}
+            onChange={this.handleInputChange}
           />
-        ))}
-        <AddWeek onClick={this.handleNewWeek} save={this.handleWeekUpdate} />
-      </PlanPanel>
-    );
+          <SimpleContainer
+            areaName={"Root Cause"}
+            name={"RootCause"}
+            state={this.state.RootCause}
+            onChange={this.handleInputChange}
+          />
+          {this.state.Weeks.map(week => (
+            <Week
+              key={week.weekNumber}
+              week={week}
+              onChange={this.handleWeekChange}
+            />
+          ))}
+          <AddWeek onClick={this.handleNewWeek} save={this.handleWeekUpdate} />
+        </PlanPanel>
+      );
+    } else {
+      return <div>Failed to Login</div>;
+    }
   }
 }
 

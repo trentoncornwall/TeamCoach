@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import API from "../../utils/API"
+import API from "../../utils/API";
 import "./index.css";
 
 class Login extends Component {
@@ -19,45 +19,51 @@ class Login extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     // Check required fields
-    if(!this.state.email || !this.state.password ) {
-      this.setState({error: "Please fill out all fields"})
-    }
-    // if (this.state.email === "admin") {
-    //   window.location = "/admin";
-    // } else if (this.state.email === "manager") {
-    //   window.location = "/main";
-    // }
-    API.checkLogin(
-      {
-      email: this.state.email,
-      password: this.state.password
-      },
-      this.state.email
-    ).then((res) => {
-      console.log(res)
-      const userInfo = res.data
+    if (!this.state.email || !this.state.password) {
+      this.setState({ error: "Please fill out all fields" });
+    } else {
+      API.checkLogin(
+        {
+          email: this.state.email,
+          password: this.state.password
+        },
+        this.state.email
+      )
+        .then(res => {
+          const userInfo = res.data;
 
-      switch (userInfo.userType) {
-        case 0:
-          window.location = "/teams"
-          break;
-        case 1:
-          window.location = "/main"
-          break;
-        case 2:
-          window.location = "/main"
-          break;
-        case 3:
-          window.location = "/admin"
-          break;
-        default:
-          // window.location = "/"
-          console.log('logged in')
-          break;
-      }
-    }).catch(e => {
-      this.setState({error: e.response.data[Object.keys(e.response.data)[0]] })
-    })
+          switch (userInfo.userType) {
+            case 0:
+              window.location = "/teams";
+              break;
+            case 1:
+              window.location = "/main";
+              break;
+            case 2:
+              window.location = "/main";
+              break;
+            case 3:
+              window.location = "/admin";
+              break;
+            default:
+              // window.location = "/"
+              console.log("logged in");
+              break;
+          }
+        })
+        .catch(e => {
+          switch (e.response.data) {
+            case "Bad Request":
+              this.setState({ error: "Incorrect Username or Password" });
+              break;
+            case "Unauthorized":
+              this.setState({ error: "Incorrect Username or Password" });
+              break;
+            default:
+              this.setState({ error: "There was an error. Please try again." });
+          }
+        });
+    }
   };
 
   render() {
