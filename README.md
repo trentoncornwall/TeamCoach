@@ -17,4 +17,4 @@ All coaching plans are ment to be a gold the person wants to accomplish. It can 
 ![Teams Page](https://github.com/trentoncornwall/TeamCoach/blob/master/images/teamspage.png)
 
 #### Empty Plan Page:
-![Plan Page](https://github.com/trentoncornwall/TeamCoach/blob/master/images/plan.png
+![Plan Page](https://github.com/trentoncornwall/TeamCoach/blob/master/images/plan.png)
