@@ -60,6 +60,7 @@ class Admin extends Component {
 
   handleTeamSubmit = event => {
     event.preventDefault();
+
     API.createTeam({
       teamName: this.state.create_teamName
     }).then(() => {
@@ -80,7 +81,8 @@ class Admin extends Component {
         lName: this.state.create_lastName,
         email: this.state.create_email,
         password: this.state.create_password,
-        userType: this.state.create_userType
+        userType: this.state.create_userType,
+        teamID: this.state.create_teamID
       },
       this.state.create_teamID
     ) //Post User to DB and Clear States
@@ -142,6 +144,10 @@ class Admin extends Component {
     });
   }
 
+  home = () => {
+    window.location = "/teams";
+  };
+
   logout = () => {
     API.logOut().then(response => {
       window.location = "/";
@@ -155,7 +161,7 @@ class Admin extends Component {
           <div className="AdminNav">
             <h1>Admin</h1>
             <div className="ButtonNav">
-              <Home />
+              <Home onClick={() => this.home()} />
               <LogOut onClick={() => this.logout()} />
             </div>
           </div>

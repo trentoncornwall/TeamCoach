@@ -18,7 +18,7 @@ function User(props) {
           Delete
         </button>
       </div>
-      <div>
+      <div className="modal">
         <Popup
           className="popup"
           modal

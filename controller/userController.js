@@ -21,6 +21,7 @@ module.exports = {
 
   CreateUser: (req, res) => {
     console.log(req.body.data);
+    console.log("Team ID: ", req.params);
     db.User.create(req.body.data)
       .then(dbUser => {
         return db.Team.findOneAndUpdate(
@@ -115,18 +116,18 @@ module.exports = {
 
   //! LOGIN ///////////////////////////////////////////////
   checkLogin: (req, res) => {
-    console.log(req.user)
-    res.json(req.user)
+    console.log(req.user);
+    res.json(req.user);
   },
 
   checkUser: (req, res) => {
-    res.json(req.user)
+    res.json(req.user);
   },
 
   logOut: (req, res) => {
-    console.log('logout')
-    console.log(req.body)
+    console.log("logout");
+    console.log(req.body);
     req.logout();
-    res.redirect('/');
+    res.redirect("/");
   }
 };
