@@ -1,0 +1,26 @@
+#newTeamForm {
+  width: 400px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+ul {
+  list-style: none;
+}
+
+li {
+  margin: 3px;
+  width: 100%;
+  display: flex;
+}
+
+li label {
+  width: 135px;
+}
+
+li input {
+  flex-grow: 2;
+}
+
+li option {
+  width: 100%;
+}

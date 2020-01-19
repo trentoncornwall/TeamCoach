@@ -5,6 +5,7 @@ import UserComp from "../components/Admin/User";
 import UserCreate from "../components/Admin/User/Create";
 import TeamCreate from "../components/Admin/Team/Create";
 import LogOut from "../components/LogOut";
+import Home from "../components/HomeButton";
 const bcrypt = require("bcryptjs");
 
 class Admin extends Component {
@@ -152,31 +153,41 @@ class Admin extends Component {
       return (
         <AdminPanel>
           <div className="AdminNav">
-            <h1>Admin</h1> <LogOut onClick={() => this.logout()} />
+            <h1>Admin</h1>
+            <div className="ButtonNav">
+              <Home />
+              <LogOut onClick={() => this.logout()} />
+            </div>
           </div>
-          {this.state.userData.map(user => (
-            <UserComp
-              id={user._id}
-              key={user._id}
-              email={user.email}
-              fullName={user.fName + " " + user.lName}
-              // Functions Pass
-              handleInputChange={this.handleInputChange}
-              delete={this.deleteButtonClick}
-            />
-          ))}
-          <UserCreate
-            // Functions Pass *different prop names?*
-            HIC={this.handleInputChange}
-            HS={this.handleSubmit}
-            // Pass State so that values are synced to state at all times
-            state={this.state}
-          />
-          <TeamCreate
-            HIC={this.handleInputChange}
-            HTS={this.handleTeamSubmit}
-            state={this.state}
-          />
+          <div className="AdminPanel">
+            <div className="UserPanel">
+              <TeamCreate
+                HIC={this.handleInputChange}
+                HTS={this.handleTeamSubmit}
+                state={this.state}
+              />
+              <UserCreate
+                // Functions Pass *different prop names?*
+                HIC={this.handleInputChange}
+                HS={this.handleSubmit}
+                // Pass State so that values are synced to state at all times
+                state={this.state}
+              />
+            </div>
+            <div className="UserInfo">
+              {this.state.userData.map(user => (
+                <UserComp
+                  id={user._id}
+                  key={user._id}
+                  email={user.email}
+                  fullName={user.fName + " " + user.lName}
+                  // Functions Pass
+                  handleInputChange={this.handleInputChange}
+                  delete={this.deleteButtonClick}
+                />
+              ))}
+            </div>
+          </div>
         </AdminPanel>
       );
     } else {
