@@ -1,22 +1,24 @@
 .AdminPanelBackground {
   background: white;
-  height: 80%;
+  height: 95%;
   overflow: scroll;
-  width: 85%;
+  width: 95%;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   opacity: 0.85;
   border-radius: 30px;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .AdminPanelInfo {
   opacity: 1;
-  color: grey;
   padding: 10px;
+  height: 100%;
   display: grid;
+  grid-template-rows: 75px auto;
+  color: grey;
 }
 
 .AdminNav {
@@ -24,6 +26,27 @@
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
+  height: 75px;
   border-bottom: 1px solid grey;
   margin-bottom: 10px;
+}
+
+.ButtonNav {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
+  width: 220px;
+}
+
+.AdminPanel {
+  display: grid;
+  grid-template-columns: 400px auto;
+  padding-top: 5px;
+}
+
+.UserPanel {
+}
+
+.UserInfo {
+  padding-left: 15px;
 }
