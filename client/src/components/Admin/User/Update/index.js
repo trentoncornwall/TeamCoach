@@ -164,8 +164,8 @@ class UpdateUser extends Component {
             </ul>
 
             {/* submit */}
-            <button id="placeholder id" onClick={this.handleSubmit}>
-              Save
+            <button id="Update" onClick={this.handleSubmit}>
+              Update
             </button>
           </fieldset>
         </form>

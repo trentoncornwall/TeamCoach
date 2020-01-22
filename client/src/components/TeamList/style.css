@@ -1,13 +1,6 @@
-
-.team-list {
-    grid-area: TeamList;
-    display: grid;
-    /* justify-content: flex-start;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    overflow-y: scroll; */
-    height: 100%;
-    width: 30vw;
-    
+.team-name {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 10px 0px 10px 10px;
 }
-

@@ -9,23 +9,38 @@
   transform: translate(-50%, -50%);
   opacity: 0.85;
   border-radius: 30px;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .MainPanelInfo {
   opacity: 1;
   color: grey;
-  padding: 20px;
+  height: 100%;
+  padding: 0px;
   display: grid;
-  /* height: 100%; */
-  grid-template-rows: 35% 65%s;
-  grid-template-columns: 40% 60%;
+  grid-template-rows: 70px auto;
+  grid-template-columns: 300px auto;
   grid-template-areas:
     "MainNav MainNav"
     "TeamList MainTeamUsers";
 }
+.MainNav {
+  grid-area: MainNav;
+  background-color: #5202bb;
+  border-bottom: 2px solid #5202bb;
+  position: relative;
+  box-shadow: 0 0 5px 2px;
+}
 
-.currentUserName{
+.team-list {
+  grid-area: TeamList;
+  border-right: 2px rgba(0, 0, 0, 0.37) solid;
+  color: white;
+}
+.userContainer {
+  grid-area: MainTeamUsers;
+}
+.currentUserName {
   text-decoration: underline;
 }
 .planItem {

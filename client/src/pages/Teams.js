@@ -14,8 +14,8 @@ class Teams extends Component {
     currentUser: "",
     currentUserFirst: "",
 
-    currentUserLast:"",
-    currentTeam:"",
+    currentUserLast: "",
+    currentTeam: "",
     currentUserPlans: [],
     teamUsers: []
   };
@@ -148,7 +148,7 @@ class Teams extends Component {
           ))}
         </TeamList>
         <MainTeamUsers>
-        <h2 className="currentTeamName"> {this.state.currentTeam}</h2>
+          <h2 className="currentTeamName"> {this.state.currentTeam}</h2>
           {this.state.currentUser.length === 0 ? (
             this.state.teamUsers.map(user => (
               <li
@@ -157,14 +157,14 @@ class Teams extends Component {
                   this.onUserClick(user.plans, user._id);
                 }}
               >
-                
                 {user.fName} {user.lName}
-                
               </li>
             ))
           ) : (
-            <ul>            
-              <h3 className="currentUserName">{this.state.currentUserFirst} {this.state.currentUserLast}</h3>
+            <ul>
+              <h3 className="currentUserName">
+                {this.state.currentUserFirst} {this.state.currentUserLast}
+              </h3>
               <form className="planForm">
                 <input
                   className="NewPlanSubject"
@@ -190,7 +190,9 @@ class Teams extends Component {
                   >
                     {plan.archived ? "Archived" : "Unarchive"}
                   </button>
-                  <a href={"/plan/" + plan._id} className="planLink">{plan.subject}</a>
+                  <a href={"/plan/" + plan._id} className="planLink">
+                    {plan.subject}
+                  </a>
                 </li>
               ))}
             </ul>

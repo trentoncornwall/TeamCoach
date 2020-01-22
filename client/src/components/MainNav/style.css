@@ -1,28 +1,27 @@
-.MainNav {
-	grid-area: MainNav;
-	width: 100%;
-	
-}
-
 .MainNav li {
-	padding-right: 30px;
-	font-size: 25px;
-	display: inline;
-	list-style-type: none;
-
+  padding-right: 30px;
+  font-size: 25px;
+  display: inline;
+  list-style-type: none;
+}
+.nav-link {
+  color: white;
+  padding: 5px 15px 5px 15px;
+  border-radius: 5px;
+  text-decoration: none;
 }
 
+.nav-link:hover {
+  color: #a055f3;
+}
 .nav-link :active {
-	color: rgb(45, 45, 45);
-	text-decoration: none;
-	
+  color: rgb(255, 255, 255);
+  text-decoration: none;
 }
 
 .nav-link :visited {
-	color: rgb(45, 45, 45);
-	
+  color: rgb(255, 255, 255);
 }
 hr {
-	width: 100%;
+  width: 100%;
 }
-

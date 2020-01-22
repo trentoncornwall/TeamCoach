@@ -39,7 +39,6 @@ function MainNav(props) {
           <LogOut onClick={props.logout} />
         </li>
       </ul>
-      <hr></hr>
     </div>
   );
 }

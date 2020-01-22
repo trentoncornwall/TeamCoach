@@ -20,8 +20,6 @@ module.exports = {
   },
 
   CreateUser: (req, res) => {
-    console.log(req.body.data);
-    console.log("Team ID: ", req.params);
     db.User.create(req.body.data)
       .then(dbUser => {
         return db.Team.findOneAndUpdate(
@@ -40,7 +38,6 @@ module.exports = {
   },
 
   updateUser: (req, res) => {
-    console.log("data", req.body.data, "id", req.params);
     db.User.findOneAndUpdate({ _id: req.params.user }, req.body.data)
       .then(() => {
         return db.Team.updateMany({}, { $pull: { users: req.params.user } });
@@ -63,7 +60,6 @@ module.exports = {
 
   deleteUser: (req, res) => {
     const query = req.body;
-    console.log("query", query._id);
     db.User.deleteOne(query)
       .then(() => {
         return db.Team.findOneAndUpdate({}, { $pull: { users: query._id } });
@@ -115,7 +111,6 @@ module.exports = {
         );
       })
       .then(data => {
-        console.log(data);
         res.send(data);
       })
       .catch(err => {
@@ -138,7 +133,6 @@ module.exports = {
 
   //! LOGIN ///////////////////////////////////////////////
   checkLogin: (req, res) => {
-    console.log(req.user);
     res.json(req.user);
   },
 
@@ -147,8 +141,6 @@ module.exports = {
   },
 
   logOut: (req, res) => {
-    console.log("logout");
-    console.log(req.body);
     req.logout();
     res.redirect("/");
   }
