@@ -1,8 +1,15 @@
 .UpdateUserForm form {
   padding: 10px;
 }
+.UpdateUserForm li {
+  margin-top: 20px;
+  width: 500px;
+}
+.popInput {
+  width: 250px;
+}
 
-.UserNameUpdate {
+.UserName {
   color: #5202bb;
   font-size: 29px;
 }

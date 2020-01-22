@@ -18,7 +18,7 @@
   height: 100%;
   display: grid;
   grid-template-rows: 75px auto;
-  color: grey;
+  color: rgb(0, 0, 0);
 }
 
 .AdminNav {
@@ -46,4 +46,16 @@
 
 .UserInfo {
   padding-left: 15px;
+}
+
+input {
+  height: 100%;
+  border: solid 1px black;
+}
+
+select {
+  width: 175px;
+  height: 100%;
+  border: solid 1px black;
+  color: black;
 }

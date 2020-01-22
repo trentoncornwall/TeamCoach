@@ -10,6 +10,9 @@ export default {
   postUser: function(data, id) {
     return axios.post("/api/teams/" + id, { data });
   },
+  putUser: function(data, id) {
+    return axios.put("/api/users/" + id, { data });
+  },
   deleteUser: function(data) {
     return axios.delete("/api/users", { data });
   },

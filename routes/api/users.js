@@ -1,7 +1,10 @@
 const router = require("express").Router();
 const userController = require("../../controller/userController");
 
-router.route("/:user").get(userController.findOne);
+router
+  .route("/:user")
+  .get(userController.findOne)
+  .put(userController.updateUser);
 
 router
   .route("/")

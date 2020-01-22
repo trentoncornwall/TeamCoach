@@ -9,7 +9,13 @@
 }
 
 .userButton {
-  height: 19px;
+  height: 100%;
+  width: 100px;
+  background-color: white;
+  border: 1px black solid;
+  border-radius: 5px;
+  font-weight: 900;
+  margin-right: 5px;
 }
 
 .delete {
@@ -17,7 +23,7 @@
 }
 
 .update {
-  color: rgb(225, 120, 82);
+  color: rgb(254, 174, 1);
 }
 
 .popup-content {

@@ -39,6 +39,28 @@ module.exports = {
       });
   },
 
+  updateUser: (req, res) => {
+    console.log("data", req.body.data, "id", req.params);
+    db.User.findOneAndUpdate({ _id: req.params.user }, req.body.data)
+      .then(() => {
+        return db.Team.updateMany({}, { $pull: { users: req.params.user } });
+      })
+      .then(() => {
+        return db.Team.findOneAndUpdate(
+          { _id: req.body.data.teamID },
+          { $push: { users: req.params.user } },
+          { new: false }
+        );
+      })
+      .then(success => {
+        res.sendStatus(200);
+      })
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  },
+
   deleteUser: (req, res) => {
     const query = req.body;
     console.log("query", query._id);

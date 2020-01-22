@@ -13,6 +13,20 @@ class UpdateUser extends Component {
     teamID: ""
   };
 
+  refresh = () => {
+    const userInfo = this.state._id;
+    this.setState({
+      teamData: [],
+      userType: "",
+      _id: "",
+      fName: "",
+      lName: "",
+      email: "",
+      teamID: ""
+    });
+    this.getUserInfo(userInfo);
+    this.loadTeams();
+  };
   getUserInfo = id => {
     API.getUser(id).then(res => {
       this.setState({
@@ -51,17 +65,33 @@ class UpdateUser extends Component {
     });
   };
 
+  handleSubmit = event => {
+    event.preventDefault();
+    const data = {
+      fName: this.state.fName,
+      lName: this.state.lName,
+      email: this.state.email,
+      userType: this.state.userType,
+      teamID: this.state.teamID
+    };
+    const id = this.state._id;
+
+    API.putUser(data, id)
+      .then(() => this.refresh())
+      .catch(err => console.log(err));
+  };
+
   componentDidMount() {
     this.getUserInfo(this.props.id);
     this.loadTeams();
   }
   render() {
     return (
-      <div className="UpdateUserForm">
-        <form>
+      <div className="UpdateUserContainer">
+        <form className="UpdateUserForm">
           <fieldset>
             {/* https://hackernoon.com/create-react-modal-using-reactjs-popup-m24m231v1 */}
-            <legend className="UserNameUpdate">
+            <legend className="UserName">
               <strong>
                 {this.state.fName} {this.state.lName}
               </strong>
@@ -71,12 +101,31 @@ class UpdateUser extends Component {
                 <label className="PopUpLabel">User Id:</label>
                 <span className="popData">{this.state._id}</span>
               </li>
-
+              <li>
+                <label className="PopUpLabel">First Name:</label>
+                <input
+                  className="popInput"
+                  name="fName"
+                  defaultValue={this.state.fName}
+                  placeholder="first name missing?"
+                  onChange={this.handleInputChange}
+                ></input>
+              </li>
+              <li>
+                <label className="PopUpLabel">Last Name:</label>
+                <input
+                  className="popInput"
+                  name="lName"
+                  defaultValue={this.state.lName}
+                  placeholder="first name missing?"
+                  onChange={this.handleInputChange}
+                ></input>
+              </li>
               <li>
                 <label className="PopUpLabel">Email: </label>
                 <input
                   className="popInput"
-                  name="updateEmail"
+                  name="email"
                   defaultValue={this.state.email}
                   placeholder="email missing?"
                   onChange={this.handleInputChange}
@@ -86,7 +135,7 @@ class UpdateUser extends Component {
                 <label className="PopUpLabel">User Type:</label>
                 <select
                   className="popDropDown"
-                  name="updateUserType"
+                  name="userType"
                   onChange={this.handleInputChange}
                   value={this.state.userType}
                 >
@@ -100,7 +149,7 @@ class UpdateUser extends Component {
                 <label className="PopUpLabel">Team:</label>
                 <select
                   className="popDropDown"
-                  name="updateTeamID"
+                  name="teamID"
                   key="teamSelect"
                   onChange={this.handleInputChange}
                   value={this.state.teamID}
@@ -115,10 +164,7 @@ class UpdateUser extends Component {
             </ul>
 
             {/* submit */}
-            <button
-              id="placeholder id"
-              // onClick="placeholder update"
-            >
+            <button id="placeholder id" onClick={this.handleSubmit}>
               Save
             </button>
           </fieldset>
