@@ -143,6 +143,7 @@ class Teams extends Component {
               teamName={team.teamName}
               key={team._id}
               id={team._id}
+              active={team.teamName == this.state.currentTeam ? true : false}
               onClick={() => this.onTeamClick(team.teamName, team.users)}
             />
           ))}
