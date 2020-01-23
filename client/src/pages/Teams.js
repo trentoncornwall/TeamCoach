@@ -5,6 +5,7 @@ import TeamName from "../components/TeamName";
 import TeamList from "../components/TeamList";
 import API from "../utils/API";
 import MainTeamUsers from "../components/MainTeamUsers";
+import UserList from "../components/MainTeamUsers/UserList";
 class Teams extends Component {
   state = {
     status: false,
@@ -148,18 +149,17 @@ class Teams extends Component {
             />
           ))}
         </TeamList>
-        <MainTeamUsers>
-          <h2 className="currentTeamName"> {this.state.currentTeam}</h2>
+        <MainTeamUsers currentTeamName={this.state.currentTeam}>
           {this.state.currentUser.length === 0 ? (
             this.state.teamUsers.map(user => (
-              <li
+              <UserList
                 key={user._id}
                 onClick={() => {
                   this.onUserClick(user.plans, user._id);
                 }}
-              >
-                {user.fName} {user.lName}
-              </li>
+                fName={user.fName}
+                lName={user.lName}
+              ></UserList>
             ))
           ) : (
             <ul>

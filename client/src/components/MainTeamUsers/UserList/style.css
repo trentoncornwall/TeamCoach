@@ -1,4 +1,4 @@
-.team-name {
+.user-name {
   cursor: pointer;
   height: 100%;
   width: 100%;
@@ -6,12 +6,12 @@
   text-decoration: none;
   color: black;
 }
-.team-name-container {
+.user-name-container {
   width: 100%;
   border-bottom: 1px solid rgb(145, 145, 145);
 }
 
-.team-name-container:hover {
+.user-name-container:hover {
   background: rgb(2, 0, 36);
   background: linear-gradient(
     90deg,
@@ -20,7 +20,7 @@
   );
 }
 
-.team-name-container-active {
+.user-name-container-active {
   width: 100%;
   border-bottom: 1px solid rgb(145, 145, 145);
   background: rgb(2, 0, 36);
