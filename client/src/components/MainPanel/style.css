@@ -19,10 +19,10 @@
   padding: 0px;
   display: grid;
   grid-template-rows: 70px auto;
-  grid-template-columns: 300px auto;
+  grid-template-columns: 300px 300px auto;
   grid-template-areas:
-    "MainNav MainNav"
-    "TeamList MainTeamUsers";
+    "MainNav MainNav MainNav"
+    "TeamList MainTeamUsers UserPlans";
 }
 .MainNav {
   grid-area: MainNav;
@@ -30,6 +30,10 @@
   border-bottom: 2px solid #5202bb;
   position: relative;
   box-shadow: 0 0 5px 2px;
+}
+
+.UserPlans {
+  grid-area: UserPlans;
 }
 
 .team-list {

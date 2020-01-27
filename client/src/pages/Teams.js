@@ -6,6 +6,7 @@ import TeamList from "../components/TeamList";
 import API from "../utils/API";
 import MainTeamUsers from "../components/MainTeamUsers";
 import UserList from "../components/MainTeamUsers/UserList";
+import UserPlans from "../components/MainTeamUsers/UserPlans";
 class Teams extends Component {
   state = {
     status: false,
@@ -53,7 +54,7 @@ class Teams extends Component {
     });
   };
 
-  onUserClick(plans, userId) {
+  onUserClick(userId) {
     let userPlans = [];
     API.getUser(userId).then(result => {
       let plans = result.data[0].plans;
@@ -78,13 +79,12 @@ class Teams extends Component {
     });
   }
 
-  setArchived(planId, archive) {
+  setArchived(planId, archive, userId) {
     let newArchiveStatus;
     archive ? (newArchiveStatus = false) : (newArchiveStatus = true);
     console.log(archive, newArchiveStatus, planId);
     API.updatePlan({ archived: newArchiveStatus }, planId).then(sucess => {
-      //update plans with new valued buttons
-      this.onUserClick(this.state.tempPlanId, this.state.currentUser);
+      //update the new archived status on the buttons
     });
   }
 
@@ -137,7 +137,7 @@ class Teams extends Component {
     return (
       <MainPanel>
         <MainNav logout={() => this.logout()} />
-
+        {/* Left Panel */}
         <TeamList>
           {this.state.data.map(team => (
             <TeamName
@@ -149,8 +149,29 @@ class Teams extends Component {
             />
           ))}
         </TeamList>
+        {/* Middle Panel */}
         <MainTeamUsers currentTeamName={this.state.currentTeam}>
-          {this.state.currentUser.length === 0 ? (
+          {this.state.teamUsers.map(user => (
+            <UserList
+              key={user._id}
+              onClick={() => {
+                this.onUserClick(user._id);
+              }}
+              fName={user.fName}
+              lName={user.lName}
+            ></UserList>
+          ))}
+        </MainTeamUsers>
+        <UserPlans
+          user={this.state.currentUser}
+          data={this.state.currentUserPlans}
+          setArchived={this.setArchived}
+        >
+          {/* {this.state.currentUserPlans.map(plan => (
+            <p>{plan.subject}</p>
+          ))} */}
+        </UserPlans>
+        {/* {this.state.currentUser.length === 0 ? (
             this.state.teamUsers.map(user => (
               <UserList
                 key={user._id}
@@ -197,8 +218,7 @@ class Teams extends Component {
                 </li>
               ))}
             </ul>
-          )}
-        </MainTeamUsers>
+          )} */}
       </MainPanel>
     );
   }
