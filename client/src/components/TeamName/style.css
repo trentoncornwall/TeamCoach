@@ -16,10 +16,13 @@
   background: linear-gradient(
     90deg,
     rgba(2, 0, 36, 0) 0%,
-    rgba(0, 0, 0, 0.235) 100%
+    rgba(0, 0, 0, 0.05) 100%
   );
 }
 
+.team-name-container:hover p {
+  color: #5202bb;
+}
 .team-name-container-active {
   width: 100%;
   border-bottom: 1px solid rgb(145, 145, 145);
@@ -27,6 +30,10 @@
   background: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0) 20%,
-    rgba(0, 0, 0, 0.427) 100%
+    rgba(0, 0, 0, 0.077) 100%
   );
+}
+
+.team-name-container-active p {
+  color: #5202bb;
 }

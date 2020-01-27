@@ -4,7 +4,7 @@ import "./style.css";
 const MainTeamUsers = ({ children }) => {
   return (
     <div className="userContainer">
-      <ul className="team-member-name">{children}</ul>
+      <div className="team-member-name">{children}</div>
     </div>
   );
 };

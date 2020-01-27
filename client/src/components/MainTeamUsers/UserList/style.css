@@ -1,32 +1,20 @@
+.user-name-container {
+  height: 100%;
+  width: 100%;
+}
+
+.user-name-container:hover p {
+  width: 100%;
+  color: #5202bb;
+}
+
 .user-name {
   cursor: pointer;
   height: 100%;
   width: 100%;
+  padding: 10px;
   font-size: 20px;
+  margin: 0px;
   text-decoration: none;
   color: black;
-}
-.user-name-container {
-  width: 100%;
-  border-bottom: 1px solid rgb(145, 145, 145);
-}
-
-.user-name-container:hover {
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 0) 0%,
-    rgba(0, 0, 0, 0.235) 100%
-  );
-}
-
-.user-name-container-active {
-  width: 100%;
-  border-bottom: 1px solid rgb(145, 145, 145);
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 20%,
-    rgba(0, 0, 0, 0.427) 100%
-  );
 }
