@@ -4,19 +4,16 @@ import "./style.css";
 const UserPlans = props => {
   return (
     <div className="UserPlans">
+      {/* Going to put create a plan here */}
       <ul className="planList">
-        {console.log(props.user)}
+        {props.user ? (
+          <div className="createPlan">
+            <p>Create New Plan:</p>
+            <input></input>
+          </div>
+        ) : null}
         {props.data.map(plan => (
           <li key={plan._id} className="planItem">
-            <button
-              key={plan._id}
-              className="archive"
-              onClick={() =>
-                props.setArchived(plan._id, plan.archived, props.user)
-              }
-            >
-              {plan.archived ? "Archived" : "Unarchived"}
-            </button>
             <a href={"/plan/" + plan._id} className="planLink">
               {plan.subject}
             </a>

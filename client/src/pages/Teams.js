@@ -55,6 +55,7 @@ class Teams extends Component {
   };
 
   onUserClick(userId) {
+    // called when clicking on a user in the 2nd column
     let userPlans = [];
     API.getUser(userId).then(result => {
       let plans = result.data[0].plans;
@@ -66,15 +67,19 @@ class Teams extends Component {
           currentUserLast: result.data[0].lName
         },
         () =>
-          plans.forEach(projectId =>
-            API.getPlan(projectId).then(result => {
-              userPlans.push(result.data[0]);
-              if (userPlans.length === plans.length) {
-                // displays all of the user's plans now
-                this.displayPlans(userPlans);
-              }
-            })
-          )
+          // call back funtion that loads the state with plans if they exists
+          plans.length > 0
+            ? // Has saved plans
+              plans.forEach(projectId =>
+                API.getPlan(projectId).then(result => {
+                  userPlans.push(result.data[0]);
+                  if (userPlans.length === plans.length) {
+                    this.displayPlans(userPlans);
+                  }
+                })
+              )
+            : // No plans exist yet
+              this.displayPlans(userPlans)
       );
     });
   }
@@ -82,7 +87,6 @@ class Teams extends Component {
   setArchived(planId, archive, userId) {
     let newArchiveStatus;
     archive ? (newArchiveStatus = false) : (newArchiveStatus = true);
-    console.log(archive, newArchiveStatus, planId);
     API.updatePlan({ archived: newArchiveStatus }, planId).then(sucess => {
       //update the new archived status on the buttons
     });
@@ -94,7 +98,6 @@ class Teams extends Component {
 
   getAllTeams() {
     API.getTeamUsers().then(result => {
-      console.log(result);
       var dataArr = [];
       result.data.forEach(team => {
         dataArr.push(team);
@@ -124,7 +127,6 @@ class Teams extends Component {
         window.location = "/";
       } else {
         if (data.data.userType === 1 || 2 || 3) {
-          console.log("setting status to true");
           this.setState({ status: true }, () => {
             this.getAllTeams();
           });
@@ -157,20 +159,28 @@ class Teams extends Component {
               onClick={() => {
                 this.onUserClick(user._id);
               }}
+              active={this.state.currentUser === user._id ? true : false}
               fName={user.fName}
               lName={user.lName}
             ></UserList>
           ))}
         </MainTeamUsers>
-        <UserPlans
+        {/* Right Panel */}
+
+        {this.state.currentUserPlans ? (
+          <UserPlans
+            user={this.state.currentUser}
+            data={this.state.currentUserPlans}
+          />
+        ) : (
+          <p></p>
+        )}
+
+        {/* <UserPlans
           user={this.state.currentUser}
           data={this.state.currentUserPlans}
-          setArchived={this.setArchived}
-        >
-          {/* {this.state.currentUserPlans.map(plan => (
-            <p>{plan.subject}</p>
-          ))} */}
-        </UserPlans>
+        /> */}
+
         {/* {this.state.currentUser.length === 0 ? (
             this.state.teamUsers.map(user => (
               <UserList

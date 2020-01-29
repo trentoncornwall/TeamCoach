@@ -1,6 +1,21 @@
 .user-name-container {
   height: 100%;
   width: 100%;
+  border-bottom: 1px solid rgb(145, 145, 145);
+}
+
+.user-name-container-active {
+  border-bottom: 1px solid rgb(138, 138, 138);
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(0, 0, 0, 0.077) 100%
+  );
+}
+
+.user-name-container-active p {
+  color: #5202bb;
 }
 
 .user-name-container:hover p {
