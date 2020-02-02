@@ -6,6 +6,8 @@ import UserCreate from "../components/Admin/User/Create";
 import TeamCreate from "../components/Admin/Team/Create";
 import LogOut from "../components/LogOut";
 import Home from "../components/HomeButton";
+import TeamsButton from "../components/Admin/TeamButton";
+import UsersButton from "../components/Admin/UserButton";
 const bcrypt = require("bcryptjs");
 
 class Admin extends Component {
@@ -21,7 +23,9 @@ class Admin extends Component {
     create_teamName: "",
     // ALL USERS
     userData: [],
-    teamData: []
+    teamData: [],
+    teamView: false,
+    userView: false
   };
 
   refresh = () => {
@@ -32,7 +36,10 @@ class Admin extends Component {
       create_email: "",
       create_password: "",
       create_teamName: "",
-      userData: []
+      userData: [],
+      teamData: [],
+      teamView: false,
+      userView: false
     });
 
     this.loadTeams();
@@ -147,6 +154,21 @@ class Admin extends Component {
     window.location = "/teams";
   };
 
+  viewTeams = () => {
+    let toggle;
+    let userToggle;
+    this.state.teamView ? (toggle = false) : (toggle = true);
+    toggle ? (userToggle = false) : (userToggle = true);
+    this.setState({ teamView: toggle, userView: userToggle });
+  };
+
+  viewUsers = () => {
+    let toggle;
+    let teamToggle;
+    this.state.userView ? (toggle = false) : (toggle = true);
+    toggle ? (teamToggle = false) : (teamToggle = true);
+    this.setState({ userView: toggle, teamView: teamToggle });
+  };
   logout = () => {
     API.logOut().then(response => {
       window.location = "/";
@@ -160,6 +182,15 @@ class Admin extends Component {
           <div className="AdminNav">
             <h1>Admin</h1>
             <div className="ButtonNav">
+              {/* TeamsButton & UsersButton toggle the state viewTeams / viewUsers true or false - this changes what is show in UserInfo Panel (teams or users) */}
+              <TeamsButton
+                onClick={() => this.viewTeams()}
+                active={this.state.teamView}
+              />
+              <UsersButton
+                onClick={() => this.viewUsers()}
+                active={this.state.userView}
+              />
               <Home onClick={() => this.home()} />
               <LogOut onClick={() => this.logout()} />
             </div>

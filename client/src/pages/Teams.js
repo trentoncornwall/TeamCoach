@@ -171,6 +171,8 @@ class Teams extends Component {
           <UserPlans
             user={this.state.currentUser}
             data={this.state.currentUserPlans}
+            onChange={this.handleInputChange}
+            onClick={this.createPlan}
           />
         ) : (
           <p></p>

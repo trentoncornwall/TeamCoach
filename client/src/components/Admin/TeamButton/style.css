@@ -1,0 +1,30 @@
+.TeamsButton {
+  width: 100px;
+  height: 40px;
+  background: #5202bb;
+  border: none;
+  color: white;
+  font-size: 19px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.TeamsButton:hover {
+  background: #a055f3;
+  cursor: pointer;
+}
+
+.TeamsButtonActive {
+  width: 100px;
+  height: 40px;
+  background: #a055f3;
+  border: none;
+  color: white;
+  font-size: 19px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.TeamsButtonActive:hover {
+  background: #5202bb;
+}
