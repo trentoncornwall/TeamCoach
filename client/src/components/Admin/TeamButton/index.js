@@ -3,12 +3,12 @@ import "./style.css";
 
 function Teams(props) {
   return (
-    <button
+    <span
       className={props.active ? "TeamsButtonActive" : "TeamsButton"}
       onClick={props.onClick}
     >
       Teams
-    </button>
+    </span>
   );
 }
 export default Teams;

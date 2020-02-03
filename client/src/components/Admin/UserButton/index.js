@@ -3,12 +3,12 @@ import "./style.css";
 
 function Users(props) {
   return (
-    <button
+    <span
       className={props.active ? "UsersButtonActive" : "UsersButton"}
       onClick={props.onClick}
     >
       Users
-    </button>
+    </span>
   );
 }
 export default Users;

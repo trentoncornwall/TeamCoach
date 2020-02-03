@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import AdminPanel from "../components/Admin/AdminPanel";
 import UserComp from "../components/Admin/User";
+import TeamComp from "../components/Admin/Team/Team";
 import UserCreate from "../components/Admin/User/Create";
-import TeamCreate from "../components/Admin/Team/Create";
+import TeamCreate from "../components/Admin/Team/Team/Create";
 import LogOut from "../components/LogOut";
 import Home from "../components/HomeButton";
 import TeamsButton from "../components/Admin/TeamButton";
@@ -25,7 +26,7 @@ class Admin extends Component {
     userData: [],
     teamData: [],
     teamView: false,
-    userView: false
+    userView: true
   };
 
   refresh = () => {
@@ -39,7 +40,7 @@ class Admin extends Component {
       userData: [],
       teamData: [],
       teamView: false,
-      userView: false
+      userView: true
     });
 
     this.loadTeams();
@@ -179,22 +180,15 @@ class Admin extends Component {
     if (this.state.status) {
       return (
         <AdminPanel>
+          {/* Nav bar */}
           <div className="AdminNav">
             <h1>Admin</h1>
             <div className="ButtonNav">
-              {/* TeamsButton & UsersButton toggle the state viewTeams / viewUsers true or false - this changes what is show in UserInfo Panel (teams or users) */}
-              <TeamsButton
-                onClick={() => this.viewTeams()}
-                active={this.state.teamView}
-              />
-              <UsersButton
-                onClick={() => this.viewUsers()}
-                active={this.state.userView}
-              />
               <Home onClick={() => this.home()} />
               <LogOut onClick={() => this.logout()} />
             </div>
           </div>
+          {/* Create Team and User Panel */}
           <div className="AdminPanel">
             <div className="UserPanel">
               <TeamCreate
@@ -210,18 +204,28 @@ class Admin extends Component {
                 state={this.state}
               />
             </div>
-            <div className="UserInfo">
-              {this.state.userData.map(user => (
+            {/* Bottom right info Panel (users) (teams) */}
+            <div className="Info">
+              <div className="InfoFilter">
+                <UsersButton
+                  onClick={() => this.viewUsers()}
+                  active={this.state.userView}
+                />
+                <TeamsButton
+                  onClick={() => this.viewTeams()}
+                  active={this.state.teamView}
+                />
+              </div>
+              {this.state.userView ? (
                 <UserComp
-                  id={user._id}
-                  key={user._id}
-                  email={user.email}
-                  fullName={user.fName + " " + user.lName}
-                  // Functions Pass
+                  userData={this.state.userData}
+                  //Functions pass
                   handleInputChange={this.handleInputChange}
                   delete={this.deleteButtonClick}
                 />
-              ))}
+              ) : (
+                <TeamComp teamData={this.state.teamData} />
+              )}
             </div>
           </div>
         </AdminPanel>
