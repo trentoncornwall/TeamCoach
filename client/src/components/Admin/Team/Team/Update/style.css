@@ -1,0 +1,34 @@
+.UpdateTeamForm form {
+  padding: 10px;
+}
+.UpdateTeamForm li {
+  margin-top: 20px;
+  width: 500px;
+}
+.popInput {
+  width: 250px;
+}
+
+.UserName {
+  color: #5202bb;
+  font-size: 29px;
+}
+
+.PopUpLabel {
+  color: black;
+}
+#Update {
+  width: 100px;
+  height: 40px;
+  background: #ffcc23;
+  border: none;
+  color: white;
+  font-size: 19px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#Update:hover {
+  background: #a055f3;
+  cursor: pointer;
+}

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export default {
+  // user path
   getUsers: function() {
     return axios.get("/api/users");
   },
@@ -16,8 +17,16 @@ export default {
   deleteUser: function(data) {
     return axios.delete("/api/users", { data });
   },
+
+  // team paths
   allTeams: function() {
     return axios.get("/api/teams");
+  },
+  getOneTeam: function(id) {
+    return axios.get("/api/teams/find/" + id);
+  },
+  updateTeam: function(data, id) {
+    return axios.get("/api/teams/find/" + id, { data });
   },
   createTeam: function(data) {
     return axios.post("/api/teams", { data });
@@ -25,6 +34,9 @@ export default {
   getTeamUsers: function(data) {
     return axios.get("/api/teams/users");
   },
+
+  //plan paths
+
   postPlan: function(data, id) {
     return axios.post("/api/plans/" + id, { data });
   },
@@ -34,6 +46,8 @@ export default {
   updatePlan: function(data, id) {
     return axios.put("/api/plans/" + id, { data });
   },
+
+  //auth paths
   checkLogin: function(data) {
     return axios.post("/api/login/", data);
   },

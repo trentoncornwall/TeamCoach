@@ -42,7 +42,6 @@ function User(props) {
               }
             })()}
             <td>
-              {" "}
               <div className="modal">
                 <Popup
                   className="popup"

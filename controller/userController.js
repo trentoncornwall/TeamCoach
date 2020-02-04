@@ -83,6 +83,20 @@ module.exports = {
       .then(userData => res.json(userData))
       .catch(err => res.status(422).json(err));
   },
+  getOneTeam: (req, res) => {
+    db.Team.find({ _id: req.params.id })
+      .then(teamData => {
+        res.json(teamData);
+      })
+      .catch(err => res.status(400).json(err));
+  },
+  updateTeam: (req, res) => {
+    db.Team.findOneAndUpdate({ _id: req.params.id }, req.body.data).then(
+      success => {
+        res.sendStatus(200);
+      }
+    );
+  },
 
   createTeam: (req, res) => {
     db.Team.create(req.body.data)
@@ -92,7 +106,6 @@ module.exports = {
         res.json(err);
       });
   },
-
   getTeamUsers: (req, res) => {
     db.Team.find({})
       .populate("users")

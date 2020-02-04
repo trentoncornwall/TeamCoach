@@ -1,5 +1,6 @@
 import React from "react";
 import Popup from "reactjs-popup";
+import UpdateTeam from "././Update";
 import "./style.css";
 
 function Team(props) {
@@ -24,6 +25,17 @@ function Team(props) {
           <tr id={team._id} key={team._id}>
             <td>{team.teamName}</td>
             <td>{team.users.length}</td>
+            <td>
+              <Popup
+                className="popup"
+                modal
+                trigger={
+                  <button className="userButton update modal">Update</button>
+                }
+              >
+                <UpdateTeam id={team._id} />
+              </Popup>
+            </td>
           </tr>
         ))}
       </tbody>
