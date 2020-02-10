@@ -26,7 +26,7 @@ export default {
     return axios.get("/api/teams/find/" + id);
   },
   updateTeam: function(data, id) {
-    return axios.get("/api/teams/find/" + id, { data });
+    return axios.put("/api/teams/find/" + id, { data });
   },
   createTeam: function(data) {
     return axios.post("/api/teams", { data });

@@ -91,11 +91,12 @@ module.exports = {
       .catch(err => res.status(400).json(err));
   },
   updateTeam: (req, res) => {
-    db.Team.findOneAndUpdate({ _id: req.params.id }, req.body.data).then(
-      success => {
+    console.log("UpdateTeam called, id", req.params.id, req.body.data);
+    db.Team.findOneAndUpdate({ _id: req.params.id }, req.body.data)
+      .then(success => {
         res.sendStatus(200);
-      }
-    );
+      })
+      .catch(err => res.status(400).json(err));
   },
 
   createTeam: (req, res) => {

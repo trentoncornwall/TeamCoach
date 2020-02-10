@@ -14,8 +14,7 @@ class UpdateTeam extends Component {
       teamID: "",
       teamName: ""
     });
-    // reloads team
-    // this.loadTeams();
+    this.getTeamInfo(teamInfo);
   };
 
   getTeamInfo = id => {
@@ -31,11 +30,11 @@ class UpdateTeam extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const data = {
-      teamName: this.state.fName
+      teamName: this.state.teamName
     };
     const id = this.state.teamID;
 
-    API.putUser(data, id)
+    API.updateTeam(data, id)
       .then(() => this.refresh())
       .catch(err => console.log(err));
   };
